@@ -1,0 +1,241 @@
+.section {
+  min-height: 100vh;
+  width: 100%;
+  padding: 80px 20px 60px;
+  background: linear-gradient(
+  180deg,
+  #4f75ff0d 0%,
+  #f5f4ff 50%,
+  #d3c7ff2f 100%
+);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.content {
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro {
+  font-size: 1.4rem;
+  font-weight: 200;
+  font-family:'verdana', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1a2541;
+  margin-bottom: 1rem;
+}
+
+.mainText {
+  font-size: 4.5rem;
+  font-family: var(--font-main);
+  font-weight: 600;
+  color: #040d24;
+  margin: 0 auto 2rem;
+  letter-spacing: -0.05em;
+  padding: 0 30px;
+  text-align: center;
+  min-height: 8rem; // Give space for the typing animation
+
+// LandingSection.module.scss
+// Typewriter.module.scss
+.highlight {
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  display: inline-block;
+  line-height: 1.3;
+  transition: background 0.5s ease;
+  will-change: contents;
+  backface-visibility: hidden;
+  
+  &.gradient0 { 
+    background: linear-gradient(90deg, 
+      #f9f8fd 0%, 
+      rgba(0, 57, 204, 0.06) 100%
+    ); 
+  }
+  &.gradient1 { 
+    background: linear-gradient(90deg, 
+      #f9f8fd 0%, 
+      rgba(0, 57, 204, 0.06) 100%
+    ); 
+  }
+  &.gradient2 { 
+    background: linear-gradient(90deg, 
+      #f9f8fd 0%, 
+      rgba(0, 57, 204, 0.06) 100%
+    ); 
+  }
+  &.gradient3 { 
+    background: linear-gradient(90deg, 
+      #f9f8fd 0%, 
+      rgba(0, 57, 204, 0.06) 100%
+    ); 
+  }
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1.2s step-end infinite;
+  
+  @keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+}
+
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(
+  90deg,
+  #fdfcfa 0%,
+  #f5f4ff 50%,
+  #6439ff56 100%
+);
+  border: 0.5px solid #c0c8dc;
+  border-radius: 48px;
+  padding: 6px 16px 6px 6px;
+  cursor: pointer;
+  margin: 1rem auto 2rem;
+  overflow: hidden;
+  z-index: 1;
+  transition: 
+    transform 0.4s cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* Rocket Head (Circle) */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 72px;
+    height: 72px;
+    background: #7b00ff;
+    border-radius: 50%;
+    z-index: 0;
+    transition: left 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /* Rocket Trail */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 72px;
+    height: 100%;
+    background: linear-gradient(90deg, #f6f6f6 0%, rgba(0, 62, 255, 0) 100%);
+    z-index: 0;
+    transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+                background 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  &:hover {
+    /* Move rocket head to right */
+
+    &::after {
+      left: calc(100% - 72px);
+    }
+    /* Add bounce and shadow */
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 62, 255, 0.2);
+
+    /* Expand trail to full width */
+    &::before {
+      width: 100%;
+      background: #6439ff;
+    }
+
+    /* Change text color */
+    .ctaText {
+      color: #fff;
+    }
+
+    /* Move arrow */
+    .arrow {
+      transform: translateX(4px) rotate(-40deg);
+    }
+  }
+
+  .ctaBox {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .arrow {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+    z-index: 2;
+  }
+
+  .ctaText {
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #000;
+    margin-left: 12px;
+    padding-left: 30px;
+    padding-right:30px;
+    z-index: 1;
+    transition: color 0.3s ease 0.1s;
+  }
+}
+
+
+.helpText {
+  font-size: 1rem;
+  color: #1a2541;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.footerNote {
+  font-size: 0.95rem;
+  color: #1a2541;
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+.nextStep {
+  text-align: center;
+  margin-top: auto;
+  
+  .line {
+    height: 2px;
+    width: 180px;
+    background: #1a2541;
+    margin: 0 auto 10px;
+  }
+  
+  .nextLabel {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a2541;
+  }
+  
+  .downArrow {
+    font-size: 2rem;
+    color: #0047ff;
+    margin-top: 5px;
+  }
+}

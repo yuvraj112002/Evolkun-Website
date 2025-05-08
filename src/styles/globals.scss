@@ -1,0 +1,50 @@
+// globals.scss
+
+:root {
+    --font-main: 'DM Sans', sans-serif;
+    --font-heading: 'DM Sans', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --color-primary: #6439ff;       /* Purple */
+    --color-secondary: #4f75ff;     /* Blue */
+    --color-accent: #00ccdd;        /* Teal */
+    --color-light: #7cf5ff;         /* Light Blue */
+    --color-dark: #292F36;
+    --shadow-pop: 0 4px 20px rgba(100, 57, 255, 0.15);
+    --input-height: 56px;
+    --input-border-radius: 30px;
+    --input-border: 2px solid rgba(100, 57, 255, 0.2);
+    --input-focus-border: var(--color-primary);
+    --input-padding: 0 1.5rem;
+    --input-font: var(--font-body);
+    --input-font-size: 1rem;
+    --input-color: var(--color-dark);
+    --input-bg: white;
+    --input-transition: all 0.3s ease;
+    --input-focus-shadow: 0 0 0 3px rgba(100, 57, 255, 0.1);
+    --font-heading: 'DM Sans', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --color-primary: #6439ff;       /* Purple */
+    --color-secondary: #4f75ff;     /* Blue */
+    --color-accent: #00ccdd;        /* Teal */
+    --color-light: #7cf5ff;         /* Light Blue */
+    --color-dark: #292F36;
+    --shadow-pop: 0 4px 20px rgba(100, 57, 255, 0.15);
+    --input-height: 56px;
+    --input-border-radius: 30px;
+    --input-border: 2px solid rgba(100, 57, 255, 0.2);
+    --input-focus-border: var(--color-primary);
+    --input-padding: 0 1.5rem;
+    --input-font: var(--font-body);
+    --input-font-size: 1rem;
+    --input-color: var(--color-dark);
+    --input-transition: all 0.3s ease;
+    --input-focus-shadow: 0 0 0 3px rgba(100, 57, 255, 0.1);
+    --form-bg: rgb(244, 244, 244);
+  }
+  
+  // Optional global resets
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }

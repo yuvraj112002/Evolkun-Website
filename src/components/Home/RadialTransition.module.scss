@@ -1,0 +1,65 @@
+.transitionOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #003eff; // transition color
+    transform: translateY(-100%);
+    z-index: 9999;
+    transition: transform 0.5s ease-in-out;
+    pointer-events: none;
+  }
+  
+  
+  
+  
+  
+  .pageTransitionOverlay {
+    position: fixed;
+    width: 100vmax;
+    height: 100vmax;
+    border-radius: 50%;
+    background-color: #003eff;
+    z-index: 1000;
+    pointer-events: none;
+    display: none;
+    transform: scale(0);
+    transform-origin: center;
+  }
+  
+  
+  .pageOverlayContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  .overlay {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    will-change: transform;
+    display: none;
+  }
+  
+  .overlayBlue {
+    background-color: #003eff;
+    z-index: 1;
+  }
+  
+  .overlayLight {
+    background-color: #8dbdff;
+    z-index: 2;
+  }
+  
+  .overlayWhite {
+    background-color: #003eff;
+    z-index: 3;
+  }
