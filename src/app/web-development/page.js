@@ -1,18 +1,21 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import styles from './main.module.scss';
+import styles from '@/styles/modules/main.module.scss';
 
 import WordPressForm from './WordPressForm';
 import ShopifyForm from './ShopifyForm';
 import WebflowForm from './WebflowForm';
 import CustomCodeForm from './CustomCodeForm';
 import WixForm from './WixForm';
+import ProgressBar from '@/components/ProgressBar';
+
 
 export default function WebDevMainForm() {
   const [step, setStep] = useState(1);
   const [hasWebsite, setHasWebsite] = useState('');
   const [siteURL, setSiteURL] = useState('');
+  const [isUrlValid, setIsUrlValid] = useState(true);
   const [platform, setPlatform] = useState('');
   const containerRef = useRef(null);
 
@@ -52,97 +55,101 @@ export default function WebDevMainForm() {
   }, [step]);
 
   return (
-    <div className={styles.formContainer}>
-      {/* Progress Bar */}
-      <div className={styles.progressBarWrapper}>
-        <div className={styles.progressBar}>
-          <div
-            className={styles.progress}
-            style={{ width: step === 1 ? '50%' : '100%' }}
-          />
-        </div>
-        <div className={styles.progressSteps}>
-          <span className={step === 1 ? styles.activeStep : ''}>1. Platform</span>
-          <span className={step === 2 ? styles.activeStep : ''}>2. Questions</span>
-        </div>
-      </div>
+    <div className={styles.formWrapper}>
+      {/* ✅ Progress Bar */}
+      <ProgressBar step={step} totalSteps={3} />
 
-      {/* Step Content */}
-      <div className={styles.stepContent} ref={containerRef}>
-        {step === 1 && (
-          <>
-            <h2 className={styles.heading}>Let's Get Started with Your Website</h2>
+      {/* ✅ Actual form section */}
+      <div className={styles.formContainer}>
+        <div className={styles.stepContent} ref={containerRef}>
+          {step === 1 && (
+            <form onSubmit={(e) => { e.preventDefault(); nextStep(); }}>
+              <h2 className={styles.heading}>Let's Get Started with Your Website</h2>
 
-            <div className={styles.fieldGroup}>
-              <label>1. Do you already have a website or need a new one?</label>
-              <select
-                className={styles.dropdown}
-                value={hasWebsite}
-                onChange={(e) => {
-                  setHasWebsite(e.target.value);
-                  setSiteURL('');
-                  setPlatform('');
-                }}
-              >
-                <option value="">Select</option>
-                <option value="existing">I already have a website</option>
-                <option value="new">I need a brand new website</option>
-              </select>
-            </div>
-
-            {hasWebsite === 'existing' && (
               <div className={styles.fieldGroup}>
-                <label>2. Paste your website URL</label>
-                <input
-                  type="url"
-                  className={styles.input}
-                  placeholder="https://yourwebsite.com"
-                  value={siteURL}
-                  onChange={(e) => setSiteURL(e.target.value)}
-                />
-              </div>
-            )}
-
-            {hasWebsite && (
-              <div className={styles.fieldGroup}>
-                <label>
-                  {hasWebsite === 'existing'
-                    ? '3. What platform is your current website built on?'
-                    : '2. What platform would you like us to build your site on?'}
-                </label>
+                <label>1. Do you already have a website or need a new one?</label>
                 <select
                   className={styles.dropdown}
-                  value={platform}
-                  onChange={(e) => setPlatform(e.target.value)}
+                  value={hasWebsite}
+                  onChange={(e) => {
+                    setHasWebsite(e.target.value);
+                    setSiteURL('');
+                    setPlatform('');
+                  }}
                 >
-                  <option value="">Select Platform</option>
-                  <option value="WordPress">WordPress</option>
-                  <option value="Shopify">Shopify</option>
-                  <option value="Webflow">Webflow</option>
-                  <option value="Custom Code">Custom Code</option>
-                  <option value="Wix">Wix</option>
+                  <option value="">Select</option>
+                  <option value="existing">I already have a website</option>
+                  <option value="new">I need a brand new website</option>
                 </select>
               </div>
-            )}
 
-            {platform && (
-              <button onClick={nextStep} className={styles.nextButton}>
-                Next ➔
+              {hasWebsite === 'existing' && (
+                <div className={styles.fieldGroup}>
+                  <label htmlFor="siteURL">2. Paste your website URL</label>
+                  <div className={styles.urlInputWrapper}>
+                    <span className={styles.prefix}>https://</span>
+                    <input
+                      id="siteURL"
+                      type="text"
+                      className={styles.input}
+                      placeholder="example.com"
+                      value={siteURL}
+                      onChange={(e) => setSiteURL(e.target.value)}
+                      onBlur={() => {
+                        const domainPattern = /^[a-zA-Z0-9.-]+\.[a-z]{2,}$/;
+                        const isValid = domainPattern.test(siteURL);
+                        setIsUrlValid(isValid);
+                      }}
+                    />
+                  </div>
+                  {!isUrlValid && siteURL && (
+                    <p className={styles.errorText}>
+                      ⚠️ Please enter a valid domain like example.com or example.in
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {hasWebsite && (
+                <div className={styles.fieldGroup}>
+                  <label>
+                    {hasWebsite === 'existing'
+                      ? '3. What platform is your current website built on?'
+                      : '2. What platform would you like us to build your site on?'}
+                  </label>
+                  <select
+                    className={styles.dropdown}
+                    value={platform}
+                    onChange={(e) => setPlatform(e.target.value)}
+                  >
+                    <option value="">Select Platform</option>
+                    <option value="WordPress">WordPress</option>
+                    <option value="Shopify">Shopify</option>
+                    <option value="Webflow">Webflow</option>
+                    <option value="Custom Code">Custom Code</option>
+                    <option value="Wix">Wix</option>
+                  </select>
+                </div>
+              )}
+
+              {platform && (
+                <button type="submit" className={styles.nextButton}>
+                  Next ➔
+                </button>
+              )}
+            </form>
+          )}
+
+          {step === 2 && (
+            <div>
+              <button onClick={prevStep} className={styles.backButton}>
+                ← Back
               </button>
-            )}
-          </>
-        )}
-
-        {step === 2 && (
-          <div>
-            <button onClick={prevStep} className={styles.backButton}>
-              ← Back
-            </button>
-            {renderPlatformForm()}
-          </div>
-        )}
+              {renderPlatformForm()}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-

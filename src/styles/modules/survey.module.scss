@@ -10,19 +10,41 @@
 }
 
 .surveyHeading {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem,6.5vw,7rem);
+  font-size: clamp(2.5rem, 6vw, 7rem);
   color: var(--color-dark);
-  text-align: center;
- // text-shadow: 3px 3px 0 var(--color-accent);
-  margin-bottom: 0.5rem;
- // transform: rotate(0deg);
+  cursor: default;
+
+  .char {
+    display: inline-block;
+    will-change: transform, letter-spacing;
+  }
+
+  .heading-ripple {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(100, 57, 255, 0.2);
+    transform: scale(0);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
+
+
 
 .subHeading {
   font-family: var(--font-body);
   font-size: 1.5rem;
   text-align: center;
+  padding-bottom: 30px;
   color: var(--);
 }
 /* Playful Form Container */
