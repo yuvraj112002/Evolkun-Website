@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './Header.module.scss';
+import Link from 'next/link';
 
 export default function Header() {
   const router = useRouter();
@@ -24,23 +25,36 @@ export default function Header() {
         <span>Evolkun</span>
       </div>
 
-      {/* Toggle Button using custom SVG */}
-      <img
-        src="/svgs/nav-menu.svg"
-        alt="Menu"
-        className={styles.menuToggle}
+      {/* Hamburger Menu */}
+      <button 
+        className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
         onClick={() => setMenuOpen(!menuOpen)}
-      />
+        aria-label="Menu"
+      >
+        <span className={styles.line}></span>
+        <span className={styles.line}></span>
+        <span className={styles.line}></span>
+      </button>
 
+      {/* Navigation Links */}
       <nav className={`${styles.navLinks} ${menuOpen ? styles.open : ''}`}>
-        <a href="#">Use Cases</a>
-        <a href="#">Pricing</a>
-        <a href="#">Company</a>
-        <a href="#">Careers</a>
-        <button className={styles.accountButton} onClick={handleClick}>
-          {isLoggedIn ? 'My Account' : 'Login / Sign Up'}
-        </button>
+        <Link href="#" onClick={() => setMenuOpen(false)}>Use Cases</Link>
+        <Link href="#" onClick={() => setMenuOpen(false)}>Pricing</Link>
+        <Link href="#" onClick={() => setMenuOpen(false)}>Company</Link>
+        <Link href="#" onClick={() => setMenuOpen(false)}>Careers</Link>
+        <div className={styles.mobileAuth}>
+          <Link href="/login" className={styles.authHalf}>Login</Link>
+          <span className={styles.separator}>/</span>
+          <Link href="/signup" className={styles.authHalf}>Sign Up</Link>
+        </div>
       </nav>
+      
+      {/* Desktop Auth Buttons */}
+      <div className={styles.authButtonWrapper}>
+        <Link href="/login" className={styles.authHalf}>Login</Link>
+        <span className={styles.separator}>/</span>
+        <Link href="/signup" className={styles.authHalf}>Sign Up</Link>
+      </div>
     </div>
   );
 }

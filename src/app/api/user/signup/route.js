@@ -8,11 +8,12 @@ import { cooldownOtp } from "@lib/coolDownOtp";
 
 export async function POST(req) {
   try {
+    
     const body = await req.json();
     console.log(body);
-    const { name, email, password, phoneNumber } = body;
+    const { name, email, password, phone } = body;
 
-    if (!name || !email || !password || !phoneNumber) {
+    if (!name || !email || !password || !phone) {
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }
@@ -23,16 +24,17 @@ export async function POST(req) {
     const existingUser = await User.findOne({ email });
     // ✅ CASE 1: If user exists and is verified
     if (existingUser && existingUser.isVerified) {
-      return res.status(409).json({ message: "Email already registered" });
+      return res.status(409).json({ message: "Email already registered",success:false });
     }
-      const cooldownCheck = cooldownOtp(user?.lastOtpSent);
+      const cooldownCheck = cooldownOtp(existingUser?.lastOtpSent);
   if (!cooldownCheck.allowed) {
-    return NextResponse.json({ message: cooldownCheck.message }, { status: cooldownCheck.status });
+    return NextResponse.json({ message: cooldownCheck.message ,success:false}, { status: cooldownCheck.status });
   }
     const otp = generateOtp();
+    console.log(otp)
     const cookieStore = await cookies();
    
-    cookieStore().set("verify_email", email, {
+    cookieStore.set("verify_email", email, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -44,7 +46,7 @@ export async function POST(req) {
     if (existingUser && !existingUser.isVerified) {
       existingUser.name = name;
       existingUser.password = password;
-      existingUser.phoneNumber = phoneNumber;
+      existingUser.phoneNumber = phone;
       existingUser.otp = otp;
       existingUser.otpExpires = Date.now() + 5 * 60 * 1000;
       existingUser.lastOtpSent = Date.now();
@@ -54,6 +56,7 @@ export async function POST(req) {
       await sendOtpEmail(email, otp);
       return NextResponse.json({
         message: "OTP re-sent. Please verify your email.",
+        success:true
       });
     }
 
@@ -62,7 +65,7 @@ export async function POST(req) {
       name,
       email,
       password,
-      phoneNumber,
+      phoneNumber:phone,
       otp, //Otp is stored in encrypted format
       otpExpires: new Date(Date.now() + 5 * 60 * 1000), // 5 min,
       lastOtpSent: new Date(), // if user didn't verify them in 10min than we are deleting their data
@@ -72,13 +75,15 @@ export async function POST(req) {
     await sendOtpEmail(email, otp);
 
     return NextResponse.json(
-      { message: "OTP sent to email. Please verify." },
+      { message: "OTP sent to email. Please verify." ,
+        success:true
+      },
       { status: 201 }
     );
   } catch (err) {
     console.error(err);
     return NextResponse.json(
-      { message: "Registration failed", error: err.message },
+      { message: "Registration failed",success:false, error: err.message },
       { status: 500 }
     );
   }

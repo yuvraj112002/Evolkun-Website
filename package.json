@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "gsap": "^3.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.3",
     "next": "15.3.2",
+    "nodemailer": "^7.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-phone-input-2": "^2.15.1",

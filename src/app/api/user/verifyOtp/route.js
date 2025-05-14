@@ -10,13 +10,15 @@ export async function POST(req) {
     await connectToDatabase();
 
     const { otp } = await req.json();
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const email = cookieStore.get('verify_email')?.value;
 
     // ✅ Edge Case: Missing OTP or email cookie
     if (!otp || !email) {
       return NextResponse.json(
-        { message: 'Email and OTP are required or expired.' },
+        { message: 'Email and OTP are required or expired.' ,
+          success:false
+        },
         { status: 400 }
       );
     }
@@ -27,18 +29,21 @@ export async function POST(req) {
     const user = await User.findOne({
       email,
       otpExpires: { $gt: new Date() },
+      // success:false
     });
 
     if (!user) {
       return NextResponse.json(
-        { message: 'Invalid or expired OTP' },
+        { message: 'Invalid or expired OTP' ,
+          success:false
+        },
         { status: 400 }
       );
     }
 
     const isMatch = await bcrypt.compare(trimmedOtp, user.otp);
     if (!isMatch) {
-      return NextResponse.json({ message: 'Invalid OTP' }, { status: 400 });
+      return NextResponse.json({ message: 'Invalid OTP',success:false }, { status: 400 });
     }
 
     // ✅ Update verification status
@@ -66,13 +71,15 @@ export async function POST(req) {
     });
 
     return NextResponse.json(
-      { message: 'Email verified successfully' },
+      { message: 'Email verified successfully' ,
+        success:true
+      },
       { status: 200 }
     );
   } catch (err) {
     console.error('OTP Verification Error:', err);
     return NextResponse.json(
-      { message: 'Verification failed', error: err.message },
+      { message: 'Verification failed', success:false , error: err.message },
       { status: 500 }
     );
   }
