@@ -2,15 +2,17 @@
 import React, { useState } from "react";
 import styles from "@/styles/modules/Signup.module.scss"; // ✅ reuse signup styles
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 const LoginModal = () => {
+ 
   const router = useRouter();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const {  setIsLoggedIn} = useUser();
   const validate = () => {
     const newErrors = {};
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
@@ -48,6 +50,7 @@ const LoginModal = () => {
       const data = await res.json();
 
       if (res.ok && data.success) {
+       setIsLoggedIn(true)
         router.push("/");
       } else {
         setServerError(data.message || "Login failed. Please try again.");

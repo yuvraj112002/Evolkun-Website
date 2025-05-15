@@ -8,8 +8,80 @@
 /* -------------------------------
    LAYOUT & CONTAINER
 ---------------------------------*/
+.nextButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(to right, #111827, #1f2937); // dark theme
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 
+  &:hover {
+    background: linear-gradient(to right, #2563eb, #1d4ed8); // blue glow
+    transform: scale(1.03);
+  }
 
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .arrow {
+    transform: translateX(4px);
+  }
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(to right, #111827, #1f2937); // dark theme
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 16px;
+  margin: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
+    transform: scale(1.03);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .arrow {
+    transform: translateX(-4px); // ⬅️ shift left on hover
+  }
+}
+
+.storeIcon{
+  width: 2rem;
+}
 .formContainer {
   background: #f4f4f4;
   border-radius: 40px;
@@ -103,7 +175,14 @@
   resize: vertical;
 }
 
-
+.containerBackground{
+  background: #f4f4f4;
+    border-radius: 40px;
+    padding: 3rem;
+    max-width: 1165px;
+    margin: 0 auto;
+    border: 2px solid #eaeaea;
+}
 
 /* -------------------------------
    URL Input Styling

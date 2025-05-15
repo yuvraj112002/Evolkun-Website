@@ -3,11 +3,11 @@ import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import styles from "@/styles/modules/main.module.scss";
 
-import WordPressForm from "./WordPressForm";
-import ShopifyForm from "./ShopifyForm";
-import WebflowForm from "./WebflowForm";
-import CustomCodeForm from "./CustomCodeForm";
-import WixForm from "./WixForm";
+// import WordPressForm from "./WordPressForm";
+// import ShopifyForm from "./ShopifyForm";
+// import WebflowForm from "./WebflowForm";
+// import CustomCodeForm from "./CustomCodeForm";
+// import WixForm from "./WixForm";
 import ProgressBar from "@/components/ProgressBar";
 
 export default function WebDevMainForm() {
@@ -24,20 +24,21 @@ export default function WebDevMainForm() {
   };
 
   const renderPlatformForm = () => {
-    switch (platform) {
-      case "WordPress":
-        return <WordPressForm />;
-      case "Shopify":
-        return <ShopifyForm />;
-      case "Webflow":
-        return <WebflowForm />;
-      case "Custom Code":
-        return <CustomCodeForm />;
-      case "Wix":
-        return <WixForm />;
-      default:
-        return null;
-    }
+    return "anc"
+    // switch (platform) {
+    //   case "WordPress":
+    //     return <WordPressForm />;
+    //   case "Shopify":
+    //     return <ShopifyForm />;
+    //   case "Webflow":
+    //     return <WebflowForm />;
+    //   case "Custom Code":
+    //     return <CustomCodeForm />;
+    //   case "Wix":
+    //     return <WixForm />;
+    //   default:
+    //     return null;
+    // }
   };
 
   useEffect(() => {

@@ -14,7 +14,7 @@ export async function POST(req) {
     // ✅ Edge Case 1: Missing email or password
     if (!email || !password) {
       return NextResponse.json(
-        { message: 'Email and password are required' },
+        { message: 'Email and password are required' ,success:false},
         { status: 400 }
       );
     }
@@ -24,7 +24,7 @@ export async function POST(req) {
     // ✅ Edge Case 2: User not found
     if (!user) {
       return NextResponse.json(
-        { message: 'Invalid email or password' },
+        { message: 'Invalid email or password' ,success:false},
         { status: 401 }
       );
     }
@@ -34,7 +34,7 @@ export async function POST(req) {
     // ✅ Edge Case 3: Wrong password
     if (!isMatch) {
       return NextResponse.json(
-        { message: 'Invalid email or password' },
+        { message: 'Invalid email or password' ,success:false},
         { status: 401 }
       );
     }
@@ -42,8 +42,8 @@ export async function POST(req) {
     const token = generateToken(user._id);
     const cookieStore = await cookies();
     // ✅ Set cookie securely
-    cookieStore().set('token', token, {
-      httpOnly: true,
+    cookieStore.set('token', token, {
+      // httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 30, // 1 day
@@ -51,7 +51,7 @@ export async function POST(req) {
     });
 
     return NextResponse.json(
-      { message: 'Login successful', userId: user._id },
+      { message: 'Login successful', userId: user._id ,success:true},
       { status: 200 }
     );
   } catch (error) {
@@ -60,7 +60,7 @@ export async function POST(req) {
     // ✅ Edge Case 4: JSON parsing or server issue
     return NextResponse.json(
       { message: 'Login failed', error: error.message || 'Unexpected error' },
-      { status: 500 }
+      { status: 500 ,success:false}
     );
   }
 }
