@@ -1,144 +1,145 @@
 .plansContainer {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 2rem;
   flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 4rem 2rem;
+  // background: #f9fafb;
 }
 
 .planCard {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  width: 320px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-}
-
-.planHeader {
-  padding: 20px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-}
-
-.planName {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.planBestFor {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.priceContainer {
-  margin-bottom: 15px;
-}
-
-.priceMonthly {
-  font-size: 32px;
-  font-weight: 700;
-  color: #2c3e50;
-}
-
-.priceAnnual {
-  font-size: 14px;
-  color: #666;
-  margin-top: 5px;
-}
-
-.popularBadge {
-  background-color: #3498db;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 15px;
-}
-
-.buyButton {
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-weight: 600;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #27ae60;
-  }
-}
-
-.planFeatures {
-  padding: 20px;
-}
-
-.featureSection {
-  margin-bottom: 20px;
-}
-
-.featureSectionTitle {
-  font-weight: 600;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #2c3e50;
-}
-
-.featureList {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.featureItem {
-  padding: 8px 0;
-  border-bottom: 1px dashed #eee;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  width: 300px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 transparent;
   display: flex;
+  flex-direction: column;
   align-items: center;
-
-  &:last-child {
-    border-bottom: none;
-  }
+  position: relative;
 }
 
-.checkmark {
-  color: #2ecc71;
-  margin-right: 8px;
-  font-weight: bold;
-}
-
-.crossmark {
-  color: #e74c3c;
-  margin-right: 8px;
-  font-weight: bold;
+.planCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .highlightCard {
-  border: 2px solid #3498db;
+  border: 2px solid #000;
   position: relative;
+}
 
-  &::before {
-    content: "POPULAR";
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #3498db;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-  }
+.popularTag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.4rem 0;
+  border-radius: 14px 14px 0 0;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+.planHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.planName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.planBestFor {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.priceContainer {
+  margin-top: 1.2rem;
+  text-align: center;
+}
+
+.priceMonthly {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.priceAnnual {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.buyButton {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #000;
+  background: transparent;
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buyButton:hover {
+  background: #000;
+  color: #fff;
+}
+
+.highlightCard .buyButton {
+  background: #000;
+  color: #fff;
+}
+
+.highlightCard .buyButton:hover {
+  background: #111;
+}
+
+.featureSectionTitle {
+  margin-top: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.featureItem {
+  font-size: 0.95rem;
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1f2937;
+}
+
+.checkmark {
+  color: #10b981;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.crossmark {
+  color: #ef4444;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
