@@ -13,8 +13,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <UserProvider>
+          <div>
         <Header/>
         <main>{children}</main>
+        </div>
         </UserProvider>
         {/* <Footer /> */}
       </body>

@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import styles from "@/styles/modules/main.module.scss";
+import useLenisScroll from '@/hooks/useLenisScroll'; // 👈 Smooth scroll hook
 
 import WordPressForm from "./WordPressForm";
 import ShopifyForm from "./ShopifyForm";
@@ -11,6 +12,8 @@ import WixForm from "./WixForm";
 import ProgressBar from "@/components/ProgressBar";
 
 export default function WebDevMainForm() {
+  useLenisScroll(); // ✅ Apply Lenis scroll here
+
   const [step, setStep] = useState(1);
   const [platform, setPlatform] = useState("");
   const containerRef = useRef(null);

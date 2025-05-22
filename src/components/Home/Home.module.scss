@@ -2,10 +2,9 @@
   min-height: 100vh;
   width: 100%;
   padding: 80px 20px 60px;
-  background: linear-gradient(
-  180deg,
+  background-color: #f4f4f4;
  
-);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,19 +60,19 @@
   }
   &.gradient1 { 
     background: linear-gradient(90deg, 
-      #f9f8fd 0%, 
-      rgba(0, 57, 204, 0.06) 100%
+      #8b6eff 0%, 
+      rgba(60, 102, 208, 0.06) 100%
     ); 
   }
   &.gradient2 { 
     background: linear-gradient(90deg, 
-      #f9f8fd 0%, 
+    #7cf5ff 0%, 
       rgba(0, 57, 204, 0.06) 100%
     ); 
   }
   &.gradient3 { 
     background: linear-gradient(90deg, 
-      #f9f8fd 0%, 
+      #1b1a1e 0%, 
       rgba(0, 57, 204, 0.06) 100%
     ); 
   }

@@ -5,6 +5,7 @@ import styles from './Home.module.scss';
 import { useRouter } from 'next/navigation';
 import { runRadialTransition } from './RadialTransition';
 import radialStyles from './RadialTransition.module.scss';
+import useLenisScroll from '@/hooks/useLenisScroll'; // 👈 import the hook
 
 const TEXTS = [
   "Can't stand boring",
@@ -12,6 +13,7 @@ const TEXTS = [
   "Bleed ideas at midnight",
   "Want chills, not checklists"
 ];
+
 
 function Typewriter({ strings }) {
   const [text, setText] = useState('');
@@ -55,6 +57,8 @@ function Typewriter({ strings }) {
     type();
   }, [type]);
 
+  
+
   return (
     <span className={`${styles.highlight} ${styles[`gradient${currentIndex % 4}`]}`}>
       {text}
@@ -64,6 +68,8 @@ function Typewriter({ strings }) {
 }
 
 export default function HomeSection() {
+  useLenisScroll(); // ✅ Apply Lenis scroll here
+
   const buttonRef = useRef(null);
   const overlayRefs = useRef([]);
   const router = useRouter();
@@ -126,5 +132,6 @@ export default function HomeSection() {
   <div ref={el => (overlayRefs.current[2] = el)} className={`${radialStyles.overlay} ${radialStyles.overlayWhite}`}></div>
 </div>
     </section>
+    
   );
 }

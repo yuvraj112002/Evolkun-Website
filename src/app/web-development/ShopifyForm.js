@@ -1,5 +1,8 @@
 import styles from '@/styles/modules/plans.module.scss';
+import useLenisScroll from '@/hooks/useLenisScroll'; // 👈 import the hook
+
 const Plans = () => {
+  useLenisScroll(); // 👈 enable smooth scroll
   return (
     <div className={styles.plansContainer}>
       {/* Basic Plan */}
@@ -114,3 +117,4 @@ const Plans = () => {
 };
 
 export default Plans;
+

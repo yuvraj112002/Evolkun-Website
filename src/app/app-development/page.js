@@ -1,33 +1,45 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import styles from '@/styles/modules/plans.module.scss';
-import LoadingPage from '@/components/LoadingPage/LoadingPage';
+"use client";
+import React, { useEffect, useState } from "react";
+import styles from "@/styles/modules/plans.module.scss";
+import LoadingPage from "@/components/LoadingPage/LoadingPage";
 const PricingPlans = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchPlans = async () => {
-    try {
-      const res = await fetch('/api/plans/demo', { method: 'POST' });
-      const data = await res.json();
-      console.log(data)
-      setPlans(data.plans); // or just `setPlans(data)` if not wrapped under `plans`
-    } catch (err) {
-      console.error('Failed to fetch:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const res = await fetch('/api/plans/demo', { method: 'POST' });
+        const data = await res.json();
+        console.log(data)
+        setPlans(data); // or just `setPlans(data)` if not wrapped under `plans`
+      } catch (err) {
+        console.error('Failed to fetch:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchPlans();
-}, []);
+    fetchPlans();
+  }, []);
 
   if (loading) {
     return (
-      <div className={styles.loading}>
-        <span>Generating your plan...</span>
-        <LoadingPage/>
+      <div
+        className={styles.loading}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "80vh",
+          gap: "1.5rem",
+        }}
+      >
+        <LoadingPage />
+        <span style={{ fontSize: "1.2rem", fontWeight: 500, color: "#333" }}>
+          Generating your plan...
+        </span>
       </div>
     );
   }
@@ -37,11 +49,13 @@ useEffect(() => {
       {plans.map((plan, idx) => (
         <div
           key={idx}
-          className={`${styles.planCard} ${plan.name === 'Standard' ? styles.highlightCard : ''}`}
+          className={`${styles.planCard} ${
+            plan.name === "Standard" ? styles.highlightCard : ""
+          }`}
         >
-           {plan.name === 'Standard' && (
-      <div className={styles.popularTag}>POPULAR</div>
-    )}
+          {plan.name === "Standard" && (
+            <div className={styles.popularTag}>POPULAR</div>
+          )}
           <div className={styles.planHeader}>
             <div className={styles.planName}>{plan.name}</div>
             <div className={styles.planBestFor}>{plan.best_for}</div>
@@ -59,10 +73,12 @@ useEffect(() => {
                 {plan.features.map((feature, i) => (
                   <li className={styles.featureItem} key={i}>
                     <span
-                      className={feature.included ? styles.checkmark : styles.crossmark}
+                      className={
+                        feature.included ? styles.checkmark : styles.crossmark
+                      }
                     >
-                      {feature.included ? '✓' : '✗'}
-                    </span>{' '}
+                      {feature.included ? "✓" : "✗"}
+                    </span>{" "}
                     {feature.name}
                   </li>
                 ))}

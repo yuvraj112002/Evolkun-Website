@@ -4,10 +4,13 @@
     z-index: 999;
     width: 100%;
     max-width: 1400px;
-    margin: 2rem auto 0;
+    margin: 0rem auto 0;
     padding: 1.3rem 2.5rem;
-    background: linear-gradient(to right, rgba(241, 241, 241, 0.9), rgba(234, 234, 234, 0.9));
+    background: linear-gradient(to right, rgba(213, 213, 213, 0.4), rgba(184, 184, 184, 0.4));
     border-radius: 2rem;
+    border: solid, rgb(237, 237, 237);
+
+    
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     align-items: center;
@@ -23,6 +26,7 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: bold;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.5rem;
   
   .icon {
@@ -68,6 +72,7 @@
   a {
     text-decoration: none;
     color: #333;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 500;
     transition: color 0.3s;
     
@@ -85,6 +90,7 @@
   .authHalf {
     text-decoration: none;
     color: #333;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 500;
     
     &:hover {

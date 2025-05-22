@@ -3,8 +3,11 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 import styles from '@/styles/modules/survey.module.scss';
+import useLenisScroll from '@/hooks/useLenisScroll'; // 👈 import the hook
 
 export default function SurveyPage() {
+  useLenisScroll(); // ✅ Apply Lenis scroll here
+
   const [showAllServices, setShowAllServices] = useState(false);
   const hiddenServicesRef = useRef(null);
   const router = useRouter();
@@ -41,43 +44,51 @@ export default function SurveyPage() {
 
   // Service cards animation
   useEffect(() => {
-    if (hiddenServicesRef.current) {
-      const cards = hiddenServicesRef.current.children;
-
-      if (showAllServices) {
-        gsap.fromTo(cards,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            stagger: 0.1,
-            ease: 'power2.out',
-            onStart: () => {
-              hiddenServicesRef.current.style.visibility = 'visible';
-              hiddenServicesRef.current.style.height = 'auto';
+    const container = hiddenServicesRef.current;
+    if (!container) return;
+  
+    const cards = container.children;
+  
+    if (showAllServices) {
+      gsap.fromTo(cards,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power2.out',
+          onStart: () => {
+            if (container) {
+              container.style.visibility = 'visible';
+              container.style.height = 'auto';
             }
           }
-        );
-      } else {
-        gsap.to(cards, {
-          opacity: 0,
-          y: 30,
-          duration: 0.3,
-          stagger: 0.1,
-          ease: 'power2.in',
-          onStart: () => {
-            hiddenServicesRef.current.style.pointerEvents = 'none';
-          },
-          onComplete: () => {
-            hiddenServicesRef.current.style.visibility = 'hidden';
-            hiddenServicesRef.current.style.height = 0;
-            hiddenServicesRef.current.style.pointerEvents = 'auto';
+        }
+      );
+    } else {
+      gsap.to(cards, {
+        opacity: 0,
+        y: 30,
+        duration: 0.3,
+        stagger: 0.1,
+        ease: 'power2.in',
+        onStart: () => {
+          if (container) {
+            container.style.pointerEvents = 'none';
           }
-        });
-      }
+        },
+        onComplete: () => {
+          if (container) {
+            container.style.visibility = 'hidden';
+            container.style.height = 0;
+            container.style.pointerEvents = 'auto';
+          }
+        }
+      });
     }
   }, [showAllServices]);
+  
 
   useEffect(() => {
     const heading = document.getElementById('animatedHeading');
