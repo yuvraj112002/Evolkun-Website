@@ -4,7 +4,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #003eff; // transition color
+    background-color: #1b1b1b; // transition color
     transform: translateY(-100%);
     z-index: 9999;
     transition: transform 0.5s ease-in-out;
@@ -20,7 +20,7 @@
     width: 100vmax;
     height: 100vmax;
     border-radius: 50%;
-    background-color: #003eff;
+    background-color: #b5b5b5;
     z-index: 1000;
     pointer-events: none;
     display: none;
@@ -50,16 +50,16 @@
   }
   
   .overlayBlue {
-    background-color: #003eff;
+    background-color: #1e1e1e;
     z-index: 1;
   }
   
   .overlayLight {
-    background-color: #8dbdff;
+    background-color: #1a1b1c;
     z-index: 2;
   }
   
   .overlayWhite {
-    background-color: #003eff;
+    background-color: #f4f4f4;
     z-index: 3;
   }

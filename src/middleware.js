@@ -1,24 +1,12 @@
-import { NextResponse } from 'next/server';
+import { clerkMiddleware } from '@clerk/nextjs/server'
 
-export function middleware(request) {
-  const token = request.cookies.get('token')?.value;
-  const pathname = request.nextUrl.pathname;
-  const isAuthPage = ['/login', '/signup'].includes(pathname);
-  const isProtectedPage = ['/account', '/dashboard'].includes(pathname);
-    console.log(token)
-  // 🔐 Prevent logged-in users from visiting login/signup
-  if (token && isAuthPage) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
-
-  // 🔒 Protect private pages
-  if (!token && isProtectedPage) {
-    return NextResponse.redirect(new URL('/login', request.url));
-  }
-
-  return NextResponse.next();
-}
+export default clerkMiddleware()
 
 export const config = {
-  matcher: ['/login', '/signup', '/account', '/dashboard'],
-};
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
+}

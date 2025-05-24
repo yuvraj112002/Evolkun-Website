@@ -3,12 +3,17 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
-import { useUser } from "@/context/UserContext";
-
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 export default function Header() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isLoggedIn } = useUser();
+
   // console.log(isLoggedIn);
 
   return (
@@ -44,30 +49,30 @@ export default function Header() {
           Careers
         </Link>
         <div className={styles.mobileAuth}>
-          <Link href="/login" className={styles.authHalf}>
-            Login
-          </Link>
-          <span className={styles.separator}>/</span>
-          <Link href="/signup" className={styles.authHalf}>
-            Sign Up
-          </Link>
+        <SignedOut>
+            <SignInButton mode="modal" redirecturl="/" >
+          <button  className={`${styles.btn} ${styles['login-btn']}`}>Login</button>
+          </SignInButton>
+          <SignUpButton mode="modal" redirecturl="/">
+          <button className={`${styles.btn} ${styles['signup-btn ']}`}>Signup</button>
+          </SignUpButton>
+        </SignedOut>
         </div>
       </nav>
 
-      {/* Desktop Auth Buttons */}
-      {isLoggedIn ? (
-        ""
-      ) : (
-        <div className={styles.authButtonWrapper}>
-          <Link href="/login" className={styles.authHalf}>
-            Login
-          </Link>
-          <span className={styles.separator}>/</span>
-          <Link href="/signup" className={styles.authHalf}>
-            Sign Up
-          </Link>
-        </div>
-      )}
+      <div className={`${styles.authButtons} `}>
+        <SignedOut>
+            <SignInButton mode="modal" redirecturl="/">
+          <button  className={`${styles.btn} ${styles['login-btn']} ${styles.hideInSmallScreen}`}>Login</button>
+          </SignInButton>
+          <SignUpButton mode="modal" redirecturl="/">
+          <button className={`${styles.btn} ${styles['signup-btn ']} ${styles.hideInSmallScreen}`}>Signup</button>
+          </SignUpButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
     </div>
   );
 }
