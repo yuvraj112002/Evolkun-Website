@@ -1,4 +1,4 @@
-// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 
 
 /* Bouncy Base Styles */
@@ -64,7 +64,7 @@
 /* Description */
 .description {
   font-family: var(--font-body) ;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 1.2rem;
   text-align: center;
   color: var(--color-dark);
@@ -87,7 +87,7 @@ align-items: center;
 
 .formGroup label {
   font-family: var(--font-body);
-  font-weight: 200;
+  font-weight: 300;
   font-size: 20px;
  // text-align: left; /* Changed from center to left */
   color: var(--color-dark);

@@ -1,64 +1,95 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+/* === Utility Classes === */
+.hideInSmallScreen {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+/* === Button Styles === */
 .authButtons {
   display: flex;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 }
 
 .btn {
   padding: 10px 24px;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 300;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* Login button - black */
 .login-btn {
-  background-color: #000;
+  background-color:var(--color-primary);
   color: #fff;
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
 }
 
-.login-btn:hover {
-  background-color: #333;
-}
-
-/* Sign Up button - bordered */
 .signup-btn {
   background-color: transparent;
-  color: #000;
+  color: var(--color-dark);
   border: 2px solid #000;
+
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
 }
 
-.signup-btn:hover {
-  background-color: #000;
-  color: #fff;
+/* === Header Wrapper === */
+
+
+.logoImage {
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  overflow: hidden;
+
+  @media (max-width: 868px) {
+    height: 42px;
+  }
 }
+
 
 
 .header {
- position: sticky;
-    top: 1rem;
-    z-index: 999;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0rem auto 0;
-    padding: 1.3rem 2.5rem;
-    background: linear-gradient(to right, rgba(213, 213, 213, 0.4), rgba(184, 184, 184, 0.4));
-    border-radius: 2rem;
-    border: solid, rgb(237, 237, 237);
+  position: sticky;
+  top: 1rem;
+  z-index: 999;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.3rem 2.5rem;
+  background: linear-gradient(to right, rgba(195, 192, 189, 0.4), rgba(200, 197, 193, 0.4));
+  border-radius: 2rem;
+  border: solid 1px rgb(237, 237, 237);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 
-    
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+  @media (max-width: 768px) {
+    border-radius: 0; // No rounded corners on mobile
+    top: 0; // Optional: reset sticky offset
+  }
 }
 
+/* === Logo === */
 .logo {
   display: flex;
   align-items: center;
@@ -66,15 +97,17 @@
   font-weight: bold;
   font-family: 'DM Sans', sans-serif;
   font-size: 1.5rem;
-  
+
   .icon {
     font-size: 1.8rem;
   }
-   &:hover {
-      cursor: pointer;
-    }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
+/* === Hamburger Menu === */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -86,11 +119,11 @@
   cursor: pointer;
   padding: 0;
   z-index: 10;
-  
+
   &:focus {
     outline: none;
   }
-  
+
   .line {
     width: 2rem;
     height: 0.25rem;
@@ -102,68 +135,129 @@
   }
 }
 
+/* === Navigation Links === */
 .navLinks {
   display: flex;
   align-items: center;
   gap: 2rem;
-  
+
   a {
+    position: relative;
     text-decoration: none;
     color: #333;
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
-    transition: color 0.3s;
-    
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+
     &:hover {
-      color: #666;
+      color: var(--color-primary); // Darker color on hover for better contrast
+      
+      &::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    // Animated underline effect
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: #000;
+      transition: all 0.3s ease;
+    }
+
+    // Optional: Different colors for active link
+    &.active {
+      color: #000;
+      font-weight: 600;
+      
+      &::after {
+        width: 100%;
+        left: 0;
+        background-color: #4f46e5; // Purple accent color
+      }
     }
   }
 }
-
+/* === Desktop Auth Buttons (Clerk) === */
 .authButtonWrapper {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
   .authHalf {
     text-decoration: none;
     color: #333;
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
-    
+
     &:hover {
       text-decoration: underline;
     }
   }
-  
+
   .separator {
     color: #333;
   }
 }
 
+/* === Mobile Auth Section (inside nav menu) === */
 .mobileAuth {
   display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row; // HORIZONTAL LAYOUT
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    margin-top: 0; // Remove top margin
+  }
+
+  .authHalf, .btn {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .separator {
+    color: #333;
+  }
 }
 
+/* === Mobile Nav === */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
-  }
-  .hideInSmallScreen{
-    display: none;
   }
 
   .navLinks {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    background-color: white;
+    right: 0;
+    inset-inline: 0; // ensures full width across LTR/RTL
+  
+    background-color: rgba(231, 231, 231, 0.906);
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 1rem 1.5rem; // horizontal internal spacing
     gap: 1.5rem;
+  
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(111, 110, 110, 0.3);
+    border-radius: 20px;
+  
     transform: translateY(-100%);
     opacity: 0;
     transition: all 0.3s ease-in-out;
@@ -174,38 +268,13 @@
       opacity: 1;
       pointer-events: all;
     }
-    
+
     a {
       padding: 0.5rem 1rem;
       width: 100%;
     }
   }
-  
-  .authButtonWrapper {
-    display: none;
-  }
-  
-  .mobileAuth {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    border-top: 1px solid #eee;
-    
-    .authHalf {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    
-    .separator {
-      color: #333;
-    }
-  }
 }
+
+
+
