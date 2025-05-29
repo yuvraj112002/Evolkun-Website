@@ -1,0 +1,108 @@
+.card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .popular {
+    border: 2px solid #8b5cf6;
+    transform: scale(1.05);
+  }
+  
+  .popularLabel {
+    background-color: #8b5cf6;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  
+  .planName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+  
+  .planDescription {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+  }
+  
+  .priceWrapper {
+    margin-bottom: 1.5rem;
+  }
+  
+  .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .feeNote {
+    margin-left: 0.5rem;
+    color: #6b7280;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+  }
+  
+  .popularButton {
+    background-color: #111827;
+    color: #fff;
+  
+    &:hover {
+      background-color: #1f2937;
+    }
+  }
+  
+  .defaultButton {
+    background-color: #fff;
+    color: #111827;
+    border: 2px solid #111827;
+  
+    &:hover {
+      background-color: #f9fafb;
+    }
+  }
+  
+  .featureList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .featureTitle {
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.75rem;
+  }
+  
+  .featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .featureIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #10b981;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  
+  .featureText {
+    color: #374151;
+  }

@@ -1,0 +1,60 @@
+.pricingPage {
+    min-height: 100vh;
+    background-color: #f9fafb;
+    padding: 4rem 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+    color: #4b5563;
+  }
+  
+  .pricingGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .loaderWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .spinner {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 9999px;
+    border-top: 2px solid #8b5cf6;
+    border-bottom: 2px solid #8b5cf6;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
