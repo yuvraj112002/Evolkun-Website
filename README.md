@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+he base score in each field represents the minimum points that question contributes to the total score, regardless of the user's answer. It accounts for:
 
-## Getting Started
+Why base exists:
+Question Importance
 
-First, run the development server:
+Even if the answer adds 0 points, the question itself has value
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Example: Just asking "What's your business name?" (base:5) has value before considering the name length
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Minimum Complexity Cost
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Covers basic processing/analysis for that question
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Example: A radio question with base:10 means answering it starts at 10 points before option bonuses
 
-## Learn More
+Prevents Zero-Score Questions
+Ensures no question is completely "free" in pricing calculations
 
-To learn more about Next.js, take a look at the following resources:
+How base Interacts with Other Scores:
+Field Type	Scoring Formula	Example
+Text Input	base + (value-based scoring)	Business name: 5 + length/10
+Radio/Select	base + option_score	Website type: 10 + 15(marketplace)
+Conditional	base + conditional_question_scores	Redesign scope: 10 + 5(partial)
+Real-World Analogy:
+Think of ordering pizza:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+base = Base pizza price ($10)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+options = Toppings (each adds $X)
 
-## Deploy on Vercel
+value = Extra cheese amount (variable cost)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+When to Adjust Base Scores:
+Increase base when:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The question indicates higher project complexity
+
+Answers require more backend processing
+
+Field is business-critical
+
+Decrease base when:
+
+Question is optional/nice-to-have
+
+Answers don't affect development much
+
+Example from your array:
+
+javascript
+{
+  id: 3, // Business type question
+  score: {
+    base: 15, // High base = critical question
+    options: {
+      "saas": 15, // Bonus for complex business type
+      "portfolio": 4 // Lower bonus for simple sites
+    }
+  }
+}
+The base ensures a SaaS website always starts at 15+ points before adding the 15-point option bonus, while a portfolio starts at 15+4.

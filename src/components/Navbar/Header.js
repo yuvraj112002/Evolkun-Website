@@ -4,16 +4,13 @@ import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { useAuth } from "@/context/UserContext";
+import ProfileDropdown from "@/components/ProfileDropDown";
+
 
 export default function Header() {
   const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef();
   const toggleRef = useRef();
@@ -65,55 +62,24 @@ export default function Header() {
         <Link href="#" onClick={() => setMenuOpen(false)}>Company</Link>
         <Link href="#" onClick={() => setMenuOpen(false)}>Careers</Link>
 
-        {/* Mobile Login/Signup (inside menu) */}
-        <div className={styles.mobileAuth}>
-          <SignedOut>
-            <SignInButton mode="modal">
-              <button className={`${styles.btn} ${styles["login-btn"]}`}>Login</button>
-            </SignInButton>
-            <SignUpButton mode="modal">
-              <button className={`${styles.btn} ${styles["signup-btn"]}`}>Signup</button>
-            </SignUpButton>
-          </SignedOut>
+         <div className={styles.container}>
+      {isLoading ? (
+        <div className={styles.spinner}></div>
+      ) : isAuthenticated ? (
+        <ProfileDropdown />
+      ) : (
+        <div className={styles.authButtons}>
+          <Link href="/signin">
+            <button className={styles.button}>Sign in</button>
+          </Link>
+          <Link href="/signup">
+            <button className={`${styles.button} ${styles.buttonPrimary}`}>Sign up</button>
+          </Link>
         </div>
+      )}
+    </div>
       </nav>
 
-      {/* Desktop Login/Signup (hidden on mobile) */}
-      <div className={styles.authButtons}>
-        <SignedOut>
-          <SignInButton mode="modal">
-            <button className={`${styles.btn} ${styles["login-btn"]} ${styles.hideInSmallScreen}`}>
-              Login
-            </button>
-          </SignInButton>
-          <SignUpButton mode="modal">
-            <button className={`${styles.btn} ${styles["signup-btn"]} ${styles.hideInSmallScreen}`}>
-              Signup
-            </button>
-          </SignUpButton>
-        </SignedOut>
-
-        <SignedIn>
-          <UserButton
-            appearance={{
-              elements: {
-                userButtonTrigger: "custom-trigger",
-                userButtonAvatarBox: "custom-avatar",
-                userButtonPopoverCard: "custom-card",
-                userButtonPopoverMain: "custom-main",
-                userButtonPopoverName: "custom-name",
-                userButtonPopoverEmail: "custom-email",
-                userButtonPopoverActions: "custom-actions",
-                userButtonPopoverActionButton: "custom-action",
-                userButtonPopoverFooter: "hide-footer",
-                userButtonPopoverUserIdentifier: "custom-workspace-title",
-                userButtonPopoverUserPreview: "custom-workspace-subtitle",
-                badge: "custom-badge",
-              },
-            }}
-          />
-        </SignedIn>
-      </div>
     </div>
   );
 }

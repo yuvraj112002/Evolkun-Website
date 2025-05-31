@@ -1,0 +1,142 @@
+/* Profile.module.scss */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 3rem 1rem;
+
+  @media (min-width: 640px) {
+    padding: 3rem 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 3rem 2rem;
+  }
+
+}
+
+.card {
+  max-width: 28rem;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  background-color: #4f46e5;
+  padding: 1.25rem 1rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  p {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #e0e7ff;
+  }
+}
+
+.body {
+  padding: 1.5rem;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  p {
+    color: #4b5563;
+  }
+}
+
+.avatar {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid #4f46e5;
+}
+
+.accountDetails {
+  margin-top: 2rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #111827;
+  }
+
+  dl {
+    margin-top: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+
+  dt {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+  }
+
+  dd {
+    font-size: 0.875rem;
+    color: #111827;
+  }
+}
+
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.backButton {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+}
+
+.logoutButton {
+  background-color: #dc2626;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #b91c1c;
+  }
+}

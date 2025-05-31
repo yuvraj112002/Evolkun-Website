@@ -1,0 +1,21 @@
+.dividerWrapper {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  border-top: 1px solid #d1d5db;
+}
+
+.label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-size: 0.875rem;
+  background-color: #fff;
+  color: #6b7280;
+  padding: 0 0.5rem;
+}

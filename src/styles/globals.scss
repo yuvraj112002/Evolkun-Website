@@ -41,131 +41,241 @@
     --input-focus-shadow: 0 0 0 3px rgba(100, 57, 255, 0.1);
     --form-bg: rgb(244, 244, 244);
   }
+/* GLOBAL CLERK LOGIN MODAL OVERRIDES */
 
-  
-.cl-internal-1yphags{
-  width: 100%;
-}
-
-.cl-internal{
-  width: 100%;
-}
-/* 🟣 Clerk SignIn / SignUp Modal Overrides */
-.cl-cardBox {
-  width: 100%;
-  border-radius: 18px;
-  padding: 2rem;
-  box-shadow: var(--shadow-pop);
- // background: #fff;
-  font-family: var(--font-body);
-}
-
-.cl-rootBox {
-  width: 100%;
-}
-
+/* Main modal container */
 .cl-modalContent {
-  width: 55% !important;
-  max-width: 600px;
-  border-radius: 20px;
+  width: 100% !important;
+  max-width: 420px !important; /* Increased width */
+  padding: 2rem !important;
+  border-radius: 12px !important;
 }
 
-/* Login / Signup Buttons */
-.cl-formButtonPrimary {
-  width: 11rem;
-  height: 3rem;
-  background-color: rgb(36, 35, 35);
-  color: white;
-  font-weight: 600;
-  border-radius: 30px;
-  transition: all 0.3s ease;
+/* Background overlay */
+.cl-modalBackdrop {
+  backdrop-filter: blur(5px) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
-.cl-formButtonPrimary:hover {
-  background-color: black;
+/* Header styling */
+.cl-modalHeader {
+  padding-bottom: 1.5rem !important;
 }
 
-/* Input Fields */
+.cl-headerTitle {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+.cl-headerSubtitle {
+  display: none !important; /* Hide subtitle if not needed */
+}
+
+/* Social buttons container */
+.cl-socialButtons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Social buttons */
+.cl-socialButtonsButton {
+  border-radius: 8px !important;
+  padding: 0.75rem !important;
+  font-weight: 500 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.cl-socialButtonsButtonGoogle {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+.cl-socialButtonsButtonApple {
+  background-color: black !important;
+  color: white !important;
+}
+
+/* Divider */
+.cl-dividerLine {
+  margin: 1.5rem 0 !important;
+}
+
+.cl-dividerText {
+  font-size: 0.875rem !important;
+  color: #6b7280 !important;
+}
+
+/* Email input field */
 .cl-formFieldInput {
-  height: 4rem;
-  border-radius: 30px;
-  border: 2px solid rgba(100, 57, 255, 0.2);
-  padding: 0 1.5rem;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--color-dark);
-  transition: var(--input-transition);
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  border: 1px solid #e5e7eb !important;
 }
 
-.cl-formFieldInput:focus {
-  outline: none;
-  border-color: var(--input-focus-border);
-  box-shadow: var(--input-focus-shadow);
+/* Continue button */
+.cl-formButtonPrimary {
+  border-radius: 8px !important;
+  padding: 0.75rem !important;
+  font-weight: 500 !important;
+  background-color: #000 !important;
+  margin-top: 1rem !important;
 }
 
-/* Footer Links (e.g., "Don't have an account?") */
+/* Footer links */
+.cl-footerActionText {
+  color: #6b7280 !important;
+  font-size: 0.875rem !important;
+}
+
 .cl-footerActionLink {
-  color: rgb(51, 48, 48);
-  font-weight: 500;
+  color: #000 !important;
+  font-weight: 500 !important;
 }
 
-.cl-footerActionLink:hover {
-  color: black;
+/* Phone/email toggle */
+.cl-auth-phoneOrEmail-container {
+  margin-bottom: 1rem !important;
 }
 
-/* 🔻 Clerk Popover (UserButton) */
-.cl-userButtonPopoverFooter {
-  display: none !important;
+/* Make sure form fields take full width */
+.cl-formField {
+  width: 100% !important;
 }
 
-.cl-internal-1dauvpw {
-  display: none !important;
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .cl-modalContent {
+    max-width: 90% !important;
+    padding: 1.5rem !important;
+  }
 }
+  
+// .cl-internal-1yphags{
+//   width: 100%;
+// }
 
-/* Optionally style the user dropdown more if needed */
-.cl-userButtonPopoverCard {
-  border-radius: 18px;
-  padding: 1rem;
-  box-shadow: var(--shadow-pop);
-  width: 320px;
-}
+// .cl-internal{
+//   width: 100%;
+// }
+// /* 🟣 Clerk SignIn / SignUp Modal Overrides */
+// .cl-cardBox {
+//   width: 100%;
+//   border-radius: 18px;
+//   padding: 2rem;
+//   box-shadow: var(--shadow-pop);
+//  // background: #fff;
+//   font-family: var(--font-body);
+// }
 
-.cl-userButtonPopoverMain {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e6e6e6;
-  font-family: var(--font-body);
-}
+// .cl-rootBox {
+//   width: 100%;
+// }
 
-.cl-userButtonPopoverName {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--color-dark);
-}
+// .cl-modalContent {
+//   width: 55% !important;
+//   max-width: 600px;
+//   border-radius: 20px;
+// }
 
-.cl-userButtonPopoverEmail {
-  font-size: 0.875rem;
-  color: gray;
-  margin-top: 2px;
-}
+// /* Login / Signup Buttons */
+// .cl-formButtonPrimary {
+//   width: 11rem;
+//   height: 3rem;
+//   background-color: rgb(36, 35, 35);
+//   color: white;
+//   font-weight: 600;
+//   border-radius: 30px;
+//   transition: all 0.3s ease;
+// }
 
-.cl-userButtonPopoverActionButton {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #333;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+// .cl-formButtonPrimary:hover {
+//   background-color: black;
+// }
 
-.cl-userButtonPopoverActionButton:hover {
-  color: black;
-}
+// /* Input Fields */
+// .cl-formFieldInput {
+//   height: 4rem;
+//   border-radius: 30px;
+//   border: 2px solid rgba(100, 57, 255, 0.2);
+//   padding: 0 1.5rem;
+//   font-family: var(--font-body);
+//   font-size: 1rem;
+//   color: var(--color-dark);
+//   transition: var(--input-transition);
+// }
+
+// .cl-formFieldInput:focus {
+//   outline: none;
+//   border-color: var(--input-focus-border);
+//   box-shadow: var(--input-focus-shadow);
+// }
+
+// /* Footer Links (e.g., "Don't have an account?") */
+// .cl-footerActionLink {
+//   color: rgb(51, 48, 48);
+//   font-weight: 500;
+// }
+
+// .cl-footerActionLink:hover {
+//   color: black;
+// }
+
+// /* 🔻 Clerk Popover (UserButton) */
+// .cl-userButtonPopoverFooter {
+//   display: none !important;
+// }
+
+// .cl-internal-1dauvpw {
+//   display: none !important;
+// }
+
+// /* Optionally style the user dropdown more if needed */
+// .cl-userButtonPopoverCard {
+//   border-radius: 18px;
+//   padding: 1rem;
+//   box-shadow: var(--shadow-pop);
+//   width: 320px;
+// }
+
+// .cl-userButtonPopoverMain {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   padding-bottom: 1rem;
+//   border-bottom: 1px solid #e6e6e6;
+//   font-family: var(--font-body);
+// }
+
+// .cl-userButtonPopoverName {
+//   font-weight: 600;
+//   font-size: 1rem;
+//   color: var(--color-dark);
+// }
+
+// .cl-userButtonPopoverEmail {
+//   font-size: 0.875rem;
+//   color: gray;
+//   margin-top: 2px;
+// }
+
+// .cl-userButtonPopoverActionButton {
+//   display: flex;
+//   align-items: center;
+//   gap: 0.75rem;
+//   padding: 0.5rem 0;
+//   font-size: 0.875rem;
+//   font-weight: 500;
+//   color: #333;
+//   cursor: pointer;
+//   transition: 0.2s ease;
+// }
+
+// .cl-userButtonPopoverActionButton:hover {
+//   color: black;
+// }
 
 
 

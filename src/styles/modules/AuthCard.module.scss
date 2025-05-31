@@ -1,0 +1,42 @@
+// AuthCard.module.scss
+.card {
+  max-width: 28rem;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.content {
+  padding: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1f2937;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #4b5563;
+}
+
+.body {
+  margin-top: 1.5rem;
+}
+
+.footer {
+  background-color: #f9fafb;
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+}
+
+.brand {
+  font-weight: 500;
+}
