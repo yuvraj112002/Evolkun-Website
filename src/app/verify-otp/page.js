@@ -11,7 +11,7 @@ import styles from "./VerifyOTP.module.scss";
 export default function VerifyOTPPage() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-
+  console.log("verify otp page ",isAuthenticated)
   useEffect(() => {
     if (isAuthenticated) {
       router.push("/");
@@ -19,7 +19,7 @@ export default function VerifyOTPPage() {
 
     const pendingEmail = localStorage.getItem("pendingEmail");
     if (!pendingEmail) {
-      router.push("/login");
+      router.push("/signin");
     }
   }, [isAuthenticated, router]);
 

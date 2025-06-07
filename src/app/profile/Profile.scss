@@ -1,0 +1,289 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #333;
+$light-gray: #f5f5f5;
+$medium-gray: #e0e0e0;
+$dark-gray: #777;
+$white: #fff;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+
+
+// Profile container
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+  color: $text-color;
+
+  .profile-loading, .profile-error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .profile-error {
+    color: #e74c3c;
+  }
+}
+
+// Profile header
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $medium-gray;
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid $primary-color;
+    }
+
+    .profile-details {
+      h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: darken($primary-color, 10%);
+      }
+
+      p {
+        margin: 0.5rem 0 0;
+        color: $dark-gray;
+        font-size: 1rem;
+      }
+
+      .plan-counts {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.8rem;
+        font-size: 0.9rem;
+
+        span {
+          background-color: $light-gray;
+          padding: 0.4rem 0.8rem;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  .profile-actions {
+    display: flex;
+    gap: 1rem;
+
+    button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: $border-radius;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.home-button {
+        background-color: $medium-gray;
+        color: $text-color;
+
+        &:hover {
+          background-color: darken($medium-gray, 10%);
+        }
+      }
+
+      &.logout-button {
+        background-color: #e74c3c;
+        color: $white;
+
+        &:hover {
+          background-color: darken(#e74c3c, 10%);
+        }
+      }
+    }
+  }
+}
+
+// Business plans section
+.business-plans-section {
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: $primary-color;
+  }
+
+  .no-plans {
+    text-align: center;
+    padding: 2rem;
+    background-color: $light-gray;
+    border-radius: $border-radius;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .business-plan-card {
+    background-color: $white;
+    border-radius: $border-radius;
+    padding: 1.5rem;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid $secondary-color;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    h4 {
+      margin: 0 0 0.5rem;
+      color: $primary-color;
+      font-size: 1.2rem;
+    }
+
+    .plan-created {
+      color: $dark-gray;
+      font-size: 0.85rem;
+      margin: 0 0 1rem;
+    }
+
+    .plan-summary {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: $text-color;
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed $medium-gray;
+
+      span:last-child {
+        font-weight: bold;
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+/* ====================== */
+/* RESPONSIVE ADJUSTMENTS */
+/* ====================== */
+
+// For tablets and smaller desktops
+@media (max-width: 1024px) {
+  .profile-container {
+    padding: 1.5rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .profile-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .profile-picture {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .profile-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  .business-plans-section {
+    .plans-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  }
+}
+
+// For mobile devices
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .profile-header {
+    .profile-details {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .profile-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+
+      button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  .business-plans-section {
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    .plans-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .business-plan-card {
+      padding: 1.2rem;
+    }
+  }
+}
+
+// For small mobile devices
+@media (max-width: 480px) {
+  .profile-header {
+    .profile-info {
+      .profile-details {
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        .plan-counts {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .business-plans-section {
+    .business-plan-card {
+      h4 {
+        font-size: 1.1rem;
+      }
+
+      .plan-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  }
+}

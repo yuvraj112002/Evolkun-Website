@@ -12,7 +12,7 @@ export default function PricingCard({ plan, isPopular }) {
       <p className={styles.planDescription}>{plan.description}</p>
 
       <div className={styles.priceWrapper}>
-        <span className={styles.price}>${plan.price}</span>
+        <span className={styles.price}>{plan.price}</span>
         <span className={styles.feeNote}>one-time setup fee</span>
       </div>
 

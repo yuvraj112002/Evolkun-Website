@@ -3,9 +3,10 @@
 import  { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/context/UserContext";
-import { toast } from "sonner";
+
 import styles from "@/styles/modules/EmailForm.module.scss";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 const EmailForm = () => {
@@ -16,20 +17,20 @@ const EmailForm = () => {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
-      toast.error("Please enter a valid email address");
+       toast.warn(" ⚠️ Please enter a valid email address");
       return;
     }
     setIsLoading(true);
     try {
-      const success = await sendOtp(email);
-      if (success) {
+      const data = await sendOtp(email);
+      if (data.success) {
         toast.success("OTP sent to your email");
         localStorage.setItem("pendingEmail", email);
         router.push("/verify-otp")
+        return;
         // window.location.href = "/verify-otp";
-      } else {
-        toast.error("Failed to send OTP. Please try again.");
-      }
+      } 
+      toast.error(data?.message || "Something went wrong")
     } catch (error) {
       toast.error("An error occurred. Please try again.");
     } finally {

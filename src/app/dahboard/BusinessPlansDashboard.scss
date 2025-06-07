@@ -1,0 +1,223 @@
+// Variables
+$primary-color: #4a6cf7;
+$secondary-color: #6c757d;
+$background-light: #f8f9fa;
+$border-color: #eaeaea;
+$success-color: #28a745;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Dashboard Styles
+.business-dashboard {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: $shadow;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  .user-info {
+    .user-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #333;
+    }
+    
+    .user-email {
+      font-size: 1rem;
+      color: $secondary-color;
+      margin: 0;
+    }
+  }
+  
+  .daily-stats {
+    display: flex;
+    gap: 1.5rem;
+    
+    .stat-card {
+      background: $background-light;
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      min-width: 120px;
+      
+      span {
+        display: block;
+        font-size: 0.9rem;
+        color: $secondary-color;
+        margin-bottom: 0.5rem;
+      }
+      
+      .stat-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        
+        &.highlight {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+.divider {
+  height: 1px;
+  background: $border-color;
+  margin: 2rem 0;
+}
+
+.plans-section {
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.plan-card {
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: $transition;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow;
+    border-color: lighten($primary-color, 30%);
+  }
+  
+  &.active {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    
+    .card-header {
+      .plan-name {
+        color: $primary-color;
+      }
+    }
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    
+    .plan-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      transition: $transition;
+    }
+    
+    .pricing-badge {
+      background: rgba($primary-color, 0.1);
+      color: $primary-color;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .card-body {
+    .plan-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      
+      .meta-label {
+        color: $secondary-color;
+        font-weight: 500;
+      }
+    }
+    
+    .tiers-indicator {
+      .tiers-label {
+        font-size: 0.9rem;
+        color: $secondary-color;
+        margin-bottom: 0.5rem;
+      }
+      
+      .tiers-visual {
+        display: flex;
+        gap: 0.5rem;
+        
+        .tier-dot {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: $primary-color;
+          opacity: 0.7;
+          animation: pulse 1.5s infinite;
+          
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(0.8); opacity: 0.4; }
+          }
+        }
+      }
+    }
+  }
+  
+  .card-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid $border-color;
+    
+    .action-btn {
+      flex: 1;
+      padding: 0.6rem;
+      border: 1px solid $border-color;
+      background: white;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: $transition;
+      
+      &:hover {
+        background: $background-light;
+      }
+      
+      &.primary {
+        background: $primary-color;
+        color: white;
+        border-color: $primary-color;
+        
+        &:hover {
+          background: darken($primary-color, 8%);
+        }
+      }
+    }
+  }
+}

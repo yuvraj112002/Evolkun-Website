@@ -22,23 +22,27 @@ function generateOtpEmailTemplate(otp) {
 export async function POST(req) {
   const { email } = await req.json();
   if (!email) return Response.json({ success: false, message: "Email is required" }, { status: 400 });
-
+try {
   await connectDB(); // ✅ Always call this before DB operations
-
+  
   const otp = generateOTP();
   const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
-
+  
   await Otp.findOneAndUpdate(
     { email },
     { email, otp, expiresAt },
     { upsert: true, new: true }
   );
-
-await sendEmail({
-      email,
-      subject: "🔐 Your OTP Code for Verification",
-      message: generateOtpEmailTemplate(otp),
-    });
-
+  
+  await sendEmail({
+    email,
+    subject: "🔐 Your OTP Code for Verification",
+    message: generateOtpEmailTemplate(otp),
+  });
+  
   return Response.json({ success: true, message: "OTP resent successfully" });
+} catch (error) {
+  return Response.json({ success: false, message: "Something went wrong" });
+  
+}
 }

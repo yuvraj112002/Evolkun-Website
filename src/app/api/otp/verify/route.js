@@ -43,7 +43,6 @@ export async function POST(req) {
       authType: "email",
     });
   }
-  console.log(user);
   const token = generateToken(user);
 
   // setTokenCookie(token)

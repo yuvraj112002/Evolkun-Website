@@ -1,0 +1,157 @@
+/* footer.scss */
+
+.footer {
+  background: linear-gradient(to right, #f9fafb, #f3f4f6);
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
+}
+
+.iconLink {
+  position: relative;
+  padding: 0.65rem;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.55rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.45rem;
+  }
+}
+
+.icon {
+  color: #4b5563;
+  transition: color 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: -2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1f2937;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+
+  .iconLink:hover & {
+    opacity: 1;
+  }
+
+  @media (max-width: 480px) {
+    top: -1.8rem;
+    font-size: 0.65rem;
+  }
+}
+
+.divider {
+  width: 6rem;
+  height: 2px;
+  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  margin: 0 auto 1.5rem auto;
+
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+  }
+}
+
+.copyright {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #4b5563;
+  font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
+
+  span {
+    font-weight: 700;
+    color: #1f2937;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #2563eb;
+    }
+  }
+}
+
+.pulses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    animation: pulse 2s infinite;
+  }
+}
+
+.accentLine {
+  height: 0.25rem;
+  background: linear-gradient(to right, #60a5fa, #a78bfa, #ec4899);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}

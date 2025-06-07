@@ -8,6 +8,7 @@ import radialStyles from './RadialTransition.module.scss';
 import useLenisScroll from '@/hooks/useLenisScroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { toast } from 'react-toastify';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,6 +70,7 @@ function Typewriter({ strings }) {
 }
 
 export default function HomeSection() {
+ 
   useLenisScroll();
   const buttonRef = useRef(null);
   const overlayRefs = useRef([]);
@@ -225,6 +227,7 @@ export default function HomeSection() {
         <div ref={el => (overlayRefs.current[1] = el)} className={`${radialStyles.overlay} ${radialStyles.overlayLight}`}></div>
         <div ref={el => (overlayRefs.current[2] = el)} className={`${radialStyles.overlay} ${radialStyles.overlayWhite}`}></div>
       </div>
+     
     </section>
   );
 }

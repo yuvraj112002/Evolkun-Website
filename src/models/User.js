@@ -1,35 +1,42 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
     trim: true,
-    lowercase: true
+    lowercase: true,
   },
   profileImage: {
     type: String,
-    default: ''
+    default: "",
   },
   authType: {
     type: String,
-    enum: ['google', 'email'],
-    required: true
+    enum: ["google", "email"],
+    required: true,
   },
-    lastPlanGeneratedAt: {
+  dailyPlanCount: { type: Number, default: 0 },
+  lastPlanGeneratedAt: {
     type: Date,
-    default: null,
+    required: false,
   },
+  plans: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "GeneratedPlanSet",
+    },
+  ],
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 // ✅ This avoids OverwriteModelError on hot reloads

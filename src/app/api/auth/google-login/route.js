@@ -6,7 +6,7 @@ import connectDB from "@/lib/db";
 import setTokenCookie from "@/lib/setTokenCookie";
 const client = new OAuth2Client({
   clientId:
-    "149429041138-eh7kkvthd54qiatmaadc04gq89k2enc2.apps.googleusercontent.com",
+    process.env.GOOGLE_CLIENT_ID,
 });
 
 export async function POST(req) {
@@ -15,14 +15,14 @@ export async function POST(req) {
     const { token } = await req.json();
     if (!token) {
       return NextResponse.json(
-        { success: false, error: "Token is required" },
+        { success: false, message: "Token is required" },
         { status: 403 }
       );
     }
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience:
-        "149429041138-eh7kkvthd54qiatmaadc04gq89k2enc2.apps.googleusercontent.com",
+       process.env.GOOGLE_CLIENT_ID,
     });
 
     const payload = ticket.getPayload();
@@ -47,11 +47,11 @@ export async function POST(req) {
     const jwtToken = generateToken(user);
     await setTokenCookie(jwtToken);
 
-    return NextResponse.json({ success: true, user });
+    return NextResponse.json({ success: true, user,message:'Login Successfull' });
   } catch (err) {
     console.error("Google login error:", err);
     return NextResponse.json(
-      { success: false, error: "Login failed" },
+      { success: false, message: "Invalid or expired token" },
       { status: 500 }
     );
   }

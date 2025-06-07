@@ -4,6 +4,9 @@ import "@/styles/globals.scss";
 import "../styles/globals.scss";
 import { AuthProvider } from "@/context/UserContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ToastContainer } from "react-toastify";
+import Footer from "@/components/Footer/page";
+import styles from "@/styles/modules/layout.module.scss"
 export const metadata = {
   title: "Evolkun | Personalized Digital Strategies",
   description:
@@ -14,13 +17,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-         <GoogleOAuthProvider clientId="149429041138-eh7kkvthd54qiatmaadc04gq89k2enc2.apps.googleusercontent.com">
+         <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
          <AuthProvider>
-        <div>
+        <div className={styles.pageWrapper}>
           <Header />
-          <main>{children}</main>
+          <main className={styles.main}>{children}</main>
+        <Footer/>
         </div>
-        {/* <Footer /> */}
+         <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
         </AuthProvider>
         </GoogleOAuthProvider>
       </body>

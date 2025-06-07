@@ -55,12 +55,10 @@
   padding: 0.5rem 1rem;
   height: 2.5rem;
   border: 1px solid #d1d5db;
-  background-color: #fff;
-  color: #111827;
   cursor: pointer;
 
   &:hover {
-    background-color: #f3f4f6;
+    background-color: #73757a;
   }
 
   &:disabled {
@@ -341,3 +339,22 @@
 
 
 
+.signupBtn{
+  background-color: transparent;
+  color: var(--color-dark);
+  border: 2px solid #000;
+
+  &:hover {
+    background-color: #bab8b8;
+    color: #000000;
+  }
+}
+
+.signinBtn{
+  background-color:var(--color-primary);
+  color: #fff;
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
+}

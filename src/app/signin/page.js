@@ -10,9 +10,9 @@ import Link from "next/link";
 import styles from "./login.module.scss";
 
 export default function LoginPage() {
-  const { isAuthenticated, loginWithGoogle } = useAuth();
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isGoogleLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {

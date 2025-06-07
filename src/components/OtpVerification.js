@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/UserContext";
-import { toast } from "sonner";
+
 import styles from "@/styles/modules/OtpVerification.module.scss";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 export default function OTPVerification() {
   const { verifyOtp, resendOtp } = useAuth();
   const [otp, setOtp] = useState("");
@@ -17,7 +18,7 @@ export default function OTPVerification() {
     if (pendingEmail) {
       setEmail(pendingEmail);
     } else {
-      router.push("/login")
+      router.push("/signin")
     }
   }, []);
 
@@ -30,14 +31,16 @@ export default function OTPVerification() {
 
     setIsVerifying(true);
     try {
-      const success = await verifyOtp(email, otp);
-      if (success) {
+      const data = await verifyOtp(email, otp);
+      if (data.success) {
         localStorage.removeItem("pendingEmail");
-        toast.success("OTP verified successfully");
+        toast.success("✅OTP verified successfully");
         window.location.href = "/";
-      } else {
-        toast.error("Invalid OTP. Please try again.");
+        return;
+      } else{
+        toast.error(data.message||"Invalid OTP. Please try again.");
       }
+      
     } catch (error) {
       console.error("Error verifying OTP:", error);
       toast.error("An error occurred. Please try again.");
@@ -49,13 +52,14 @@ export default function OTPVerification() {
   const handleResendOtp = async () => {
     setIsResending(true);
     try {
-      const success = await resendOtp(email);
-      if (success) {
-        toast.success("OTP resent to your email");
+      const data = await resendOtp(email);
+      if (data.success) {
+        toast.success("✅OTP resent to your email");
         localStorage.removeItem("pendingEmail");
-      } else {
-        toast.error("Failed to resend OTP. Please try again.");
+      } else{
+        toast.error(data?.message || "❌Failed to resend OTP. Please try again.");
       }
+      
     } catch (error) {
       console.error("Error resending OTP:", error);
       toast.error("An error occurred. Please try again.");

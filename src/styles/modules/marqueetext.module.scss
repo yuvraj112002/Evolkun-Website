@@ -1,0 +1,30 @@
+.betaMarquee {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: -4rem;
+    position: relative;
+    margin: 0rem 3rem 0;
+    margin-bottom: 5rem;
+    border-radius: 10px;
+    background-color: rgb(225, 225, 225) !important; // force it clear
+  }
+  
+  .marqueeTrack {
+    background-color: transparent !important; // completely transparent
+    display: inline-block;
+    width: 100%;
+    //padding-left: 100%;
+    font-family: var(--font-body, sans-serif);
+    text-align: center;
+    color: rgb(62, 62, 62);
+    animation: marqueeScroll 15s linear infinite;
+  }
+  
+  @keyframes marqueeScroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }

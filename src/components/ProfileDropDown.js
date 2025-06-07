@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/UserContext";
 import styles from "@/styles/modules/ProfileDropdown.module.scss";
+import { toast } from "react-toastify";
 
 export default function ProfileDropdown() {
   const { user, logout } = useAuth();
@@ -22,10 +23,11 @@ export default function ProfileDropdown() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async() => {
+   const data = await logout();
+   toast.success( data?.message )
     setIsOpen(false);
-    router.push("/signin");
+     router.push("/");
   };
 
   if (!user) return null;
@@ -46,9 +48,10 @@ export default function ProfileDropdown() {
             <p>{user.name}</p>
             <small>{user.email}</small>
           </div>
-          <Link href="/profile" className={styles.menuItem} onClick={() => setIsOpen(false)}>
+           <button className={styles.menuItem} onClick={()=>{ setIsOpen(false); router.push("/profile")}}>
             Your Profile
-          </Link>
+          </button>
+          
           <button onClick={handleLogout} className={styles.menuItem}>
             Sign out
           </button>

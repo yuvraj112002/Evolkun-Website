@@ -1,74 +1,152 @@
 "use client";
-
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import "./Profile.scss";
 import { useAuth } from "@/context/UserContext";
-import styles from "./Profile.module.scss";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import LoadingSpinner from "@/components/loadingSpinner";
 
-export default function Profile() {
-  const { user, logout ,isAuthenticated } = useAuth();
+  
+const Profile = () => {
   const router = useRouter();
-    useEffect(() => {
-    if (!isAuthenticated && typeof window !== "undefined") {
-      router.push("/login");
-    }
-  }, [isAuthenticated]);
-  const handleLogout = () => {
-    logout();
-    router.push("/login");
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { user, isAuthenticated, isLoading, logout, checkAuthProfile } =
+    useAuth();
+
+  useEffect(() => {
+    const fetchProfileIfNeeded = async () => {
+      try {
+        if (isLoading) return;
+
+        if (!isAuthenticated) {
+          router.push("/signin");
+          return;
+        }
+
+        // ✅ Only proceed if we haven't already set userData
+        if (user && user.name && user.email && user.plans && !userData) {
+          console.log("✅ Using existing user from context");
+          setUserData(user);
+          return;
+        }
+
+        // ✅ If userData already set, skip everything
+        if (userData) return;
+
+        console.log("📡 Fetching from /api/profile...");
+        const result = await checkAuthProfile();
+        if (result && result.name) {
+          setUserData(result);
+        }
+      } catch (error) {
+        console.error(error);
+        setError("Something went wrong while loading your profile.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfileIfNeeded();
+  }, [user, userData, isAuthenticated, isLoading]);
+
+  const handleLogout = async () => {
+    const data = await logout();
+    toast.success(data?.message);
+    router.push("/");
   };
 
+  const handlePlanClick = (planId) => {
+    console.log("Clicked Plan ID:", planId);
+    router.push(`/pricing/${planId}`);
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  if (loading || isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div className="profile-error">{error}</div>;
+  }
+  if (!userData) return <LoadingSpinner />;
+
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.header}>
-          <h3>User Profile</h3>
-          <p>Your personal information</p>
+    <div className="profile-container">
+      <div className="profile-header">
+        <div className="profile-info">
+          <img
+            src={
+              userData.profileImage ||
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                userData.name
+              )}`
+            }
+            alt="Profile"
+            className="profile-picture"
+          />
+          <div className="profile-details">
+            <h2>{userData.name}</h2>
+            <p>{userData.email}</p>
+            <div className="plan-counts">
+              <span>Daily Plans: {userData.dailyPlanCount}</span>
+              <span>Remaining Today: {userData.remainingPlansToday}</span>
+            </div>
+          </div>
         </div>
-        <div className={styles.body}>
-          <div className={styles.profileInfo}>
-            <img
-              src={
-                user?.profileImage ||
-                `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                  user?.name || "User"
-                )}`
-              }
-              alt="Profile"
-              className={styles.avatar}
-            />
-            <h2>{user?.name}</h2>
-            <p>{user?.email}</p>
-          </div>
 
-          <div className={styles.accountDetails}>
-            <h3>Account Details</h3>
-            <dl>
-              <div className={styles.detailRow}>
-                <dt>Name</dt>
-                <dd>{user?.name}</dd>
-              </div>
-              <div className={styles.detailRow}>
-                <dt>Email</dt>
-                <dd>{user?.email}</dd>
-              </div>
-              <div className={styles.detailRow}>
-                <dt>User ID</dt>
-                <dd>{user?.id}</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className={styles.actions}>
-            <button onClick={() => router.push("/")} className={styles.backButton}>
-              Back to Home
-            </button>
-            <button onClick={handleLogout} className={styles.logoutButton}>
-              Sign out
-            </button>
-          </div>
+        <div className="profile-actions">
+          <button className="home-button" onClick={() => router.push("/")}>
+            Home
+          </button>
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
+
+      <div className="business-plans-section">
+        <h3>Your Business Plans</h3>
+
+        {userData.plans.length === 0 ? (
+          <p className="no-plans">You don't have any business plans yet.</p>
+        ) : (
+          <div className="plans-grid">
+            {userData.plans.map((plan) => (
+              <div
+                key={plan._id}
+                className="business-plan-card"
+                onClick={() => handlePlanClick(plan._id)}
+              >
+                <h4>{plan.businessName}</h4>
+                <p className="plan-created">
+                  Created: {formatDate(plan.createdAt)}
+                </p>
+                <div className="plan-summary">
+                  <span>{plan.plans.length} pricing tiers</span>
+                  <span>From {plan.plans[0].price}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+     
+
     </div>
   );
-}
+};
+
+export default Profile;

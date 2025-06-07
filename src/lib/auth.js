@@ -12,13 +12,11 @@ export const isAuthenticated = async (requestHeaders) => {
 
     const tokenMatch = cookieHeader.match(/token=([^;]+)/);
     const token = tokenMatch ? tokenMatch[1] : null;
-    console.log("Token from cookie:", token);
-    console.log(token)
+
     if (!token) return null;
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded)
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id).exec();
     return user || null;
   } catch (error) {
     console.error("isAuthenticated error:", error);

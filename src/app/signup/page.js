@@ -11,16 +11,15 @@ import EmailForm from "@/components/EmailForm";
 import styles from "./Signup.module.scss";
 
 export default function SignupPage() {
-  const { isAuthenticated, loginWithGoogle } = useAuth();
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isGoogleLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
       router.push("/");
     }
   }, [isAuthenticated, router]);
-
 
   return (
      <div className={styles.container}>
@@ -32,13 +31,14 @@ export default function SignupPage() {
         <div className={styles.bottomLink}>
           <p>
             Already have an account?{" "}
-            <Link href="/login" className={styles.link}>
+            <Link href="/signin" className={styles.link}>
               Sign in
             </Link>
           </p>
         </div>
       </div>
     </AuthCard>
+   
   </div>
   );
 }
