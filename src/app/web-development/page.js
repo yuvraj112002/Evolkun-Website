@@ -100,9 +100,7 @@ export default function WebDevMainForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      console.log(response);
       const data = await response.json();
-      console.log(data);
       // return;
       if (data.success) {
         router.push(`/pricing/${data?.planId}`);
@@ -206,9 +204,9 @@ export default function WebDevMainForm() {
               placeholder={q.placeholder}
             />
             {errorField === q.name && (
-              <p className={styles.errorText}>
-                Please select an option before continuing.
-              </p>
+              // <p className={styles.errorText}>
+                <ToastMessage message={"Please select an option before continuing."} />
+              // </p>
             )}
           </>
         )}
@@ -233,9 +231,9 @@ export default function WebDevMainForm() {
               ))}
             </select>
             {errorField === q.name && (
-              <p className={styles.errorText}>
-                Please select an option before continuing.
-              </p>
+              // <p className={styles.errorText}>
+                 <ToastMessage message={"Please select an option before continuing."} />
+              // {/* </p> */}
             )}
           </>
         )}
@@ -249,9 +247,9 @@ export default function WebDevMainForm() {
               options={options}
             />
             {errorField === q.name && (
-              <p className={styles.errorText}>
-                Please select an option before continuing.
-              </p>
+              // <p className={styles.errorText}>
+                 <ToastMessage message={"Please select an option before continuing."} />
+              // </p>
             )}
           </>
         )}
@@ -271,9 +269,9 @@ export default function WebDevMainForm() {
               </label>
             ))}
             {errorField === q.name && (
-              <p className={styles.errorText}>
-                Please select an option before continuing.
-              </p>
+              // <p className={styles.errorText}>
+                 <ToastMessage message={"Please select an option before continuing."} />
+              // </p>
             )}
           </div>
         )}
@@ -344,7 +342,6 @@ export default function WebDevMainForm() {
               const currentQuestion = displayedQuestions[0]; // current step's only question
               const { name, required } = currentQuestion;
               const value = formData[name];
-              console.log(required, !value, name, "abc");
               if (required && !value) {
                 setErrorField(name);
                 return;
@@ -364,6 +361,7 @@ export default function WebDevMainForm() {
           >
             {displayedQuestions.map(renderField)}
 
+          </form>
             <div className={styles.bottomNavBar}>
               {step > 1 && (
                 <button
@@ -383,7 +381,6 @@ export default function WebDevMainForm() {
                 {loading ? "Loading..." : isLastStep ? "Submit" : "Next"}
               </button>
             </div>
-          </form>
         </div>
       </div>
       <div className={styles.stickyFooter}></div>

@@ -11,13 +11,12 @@ export const AuthProvider = ({ children }) => {
   const checkAuthProfile = async () => {
     //  if (isLoading) return;
     try {
-      console.log("fetching user profile");
       const response = await fetch("/api/user/profile", {
         method: "GET",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       });
-      console.log("checkAuthProfile call ");
+    
       const data = await response.json();
 
       if (data.user) {
@@ -41,11 +40,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const cachedUser = sessionStorage.getItem("user");
     if (cachedUser) {
-      console.log("✅ Cached user found");
+      
       setUser(JSON.parse(cachedUser));
       setIsLoading(false);
     } else {
-      console.log("🔁 No cached user found, calling API...");
+  
       checkAuthProfile().then((userData) => {
         if (userData) sessionStorage.setItem("user", JSON.stringify(userData));
       });

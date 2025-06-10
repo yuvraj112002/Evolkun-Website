@@ -1,16 +1,15 @@
 "use client";
 import React from 'react';
-import { Instagram, Linkedin, Youtube, Github, Twitter, Facebook } from 'lucide-react';
+import { Instagram, Linkedin, Youtube, Twitter, Facebook ,X} from 'lucide-react';
 import styles from './Footer.module.scss'; // Assuming you have a CSS module for styles
 
 const Footer = () => {
   const socialLinks = [
-    { name: 'Instagram', icon: Instagram, href: '#', color: 'hover:text-pink-600' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#', color: 'hover:text-blue-600' },
-    { name: 'YouTube', icon: Youtube, href: '#', color: 'hover:text-red-600' },
-    { name: 'GitHub', icon: Github, href: '#', color: 'hover:text-gray-800' },
-    { name: 'Twitter', icon: Twitter, href: '#', color: 'hover:text-blue-400' },
-    { name: 'Facebook', icon: Facebook, href: '#', color: 'hover:text-blue-700' }
+    { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/evolkun_officials/', color: 'hover:text-pink-600' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/evolkun-pvt-65680b36a', color: 'hover:text-blue-600' },
+    // { name: 'YouTube', icon: Youtube, href: '#', color: 'hover:text-red-600' },
+    { name: 'X', icon: X, href: 'https://x.com/Evolkun_7', color: 'hover:text-blue-400' },
+    // { name: 'Facebook', icon: Facebook, href: '#', color: 'hover:text-blue-700' }
   ];
 
   return (

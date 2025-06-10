@@ -36,6 +36,7 @@ export default function ProfileDropdown() {
     <div className={styles.wrapper} ref={dropdownRef}>
       <button className={styles.avatarBtn} onClick={() => setIsOpen(!isOpen)}>
         <img
+         loading="lazy"
           src={user.profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`}
           alt="Profile"
           className={styles.avatar}

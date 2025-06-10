@@ -1,4 +1,5 @@
 // app/layout.js
+"use client";
 import Header from "@/components/Navbar/Header";
 import "@/styles/globals.scss";
 import "../styles/globals.scss";
@@ -7,22 +8,21 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import Footer from "@/components/Footer/page";
 import styles from "@/styles/modules/layout.module.scss"
-export const metadata = {
-  title: "Evolkun | Personalized Digital Strategies",
-  description:
-    "Build smarter, not harder. Get real-time digital solutions powered by logic.",
-};
+import { usePathname } from 'next/navigation';
+
 
 export default function RootLayout({ children }) {
+   const pathname = usePathname();
+     const hideFooterPaths = ['/signup', '/signin','/web-development','/app-development','/comming-soon'];
   return (
     <html lang="en">
       <body>
-         <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
+         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
          <AuthProvider>
         <div className={styles.pageWrapper}>
           <Header />
           <main className={styles.main}>{children}</main>
-        <Footer/>
+        {!hideFooterPaths.includes(pathname) && <Footer />}
         </div>
          <ToastContainer
         position="top-right"

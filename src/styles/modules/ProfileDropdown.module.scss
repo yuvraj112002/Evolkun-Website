@@ -22,12 +22,14 @@
   position: absolute;
   right: 0;
   margin-top: 0.5rem;
-  width: 12rem;
+  min-width: 12rem;
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  font-family: "Poppins", sans-serif;
+
 }
 /* Correct media query syntax */
 @media screen and (max-width: 768px) {
@@ -40,9 +42,11 @@
 .menuHeader {
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #f3f4f6;
+  overflow: hidden;
 }
 
 .menuHeader p {
+  font-family: "Poppins", sans-serif;
   margin: 0;
   font-size: 0.875rem;
   color: #111827;
@@ -52,6 +56,7 @@
 .menuHeader small {
   display: block;
   font-size: 0.75rem;
+  font-family: "Poppins", sans-serif;
   color: #6b7280;
   margin-top: 0.25rem;
 }
@@ -60,6 +65,8 @@
   display: block;
   width: 100%;
   padding: 0.5rem 1rem;
+  font-family: "Poppins", sans-serif;
+
   font-size: 0.875rem;
   text-align: left;
   color: #374151;

@@ -1,20 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import "./Profile.scss";
 import { useAuth } from "@/context/UserContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/loadingSpinner";
+import "./Profile.scss";
 
-  
-const Profile = () => {
+export default function Profile() {
   const router = useRouter();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activePlan, setActivePlan] = useState(null);
+
   const { user, isAuthenticated, isLoading, logout, checkAuthProfile } =
     useAuth();
-
+    
   useEffect(() => {
     const fetchProfileIfNeeded = async () => {
       try {
@@ -27,7 +28,6 @@ const Profile = () => {
 
         // ✅ Only proceed if we haven't already set userData
         if (user && user.name && user.email && user.plans && !userData) {
-          console.log("✅ Using existing user from context");
           setUserData(user);
           return;
         }
@@ -35,7 +35,6 @@ const Profile = () => {
         // ✅ If userData already set, skip everything
         if (userData) return;
 
-        console.log("📡 Fetching from /api/profile...");
         const result = await checkAuthProfile();
         if (result && result.name) {
           setUserData(result);
@@ -58,7 +57,7 @@ const Profile = () => {
   };
 
   const handlePlanClick = (planId) => {
-    console.log("Clicked Plan ID:", planId);
+    setActivePlan(activePlan === planId ? null : planId);
     router.push(`/pricing/${planId}`);
   };
 
@@ -83,70 +82,90 @@ const Profile = () => {
   if (!userData) return <LoadingSpinner />;
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <div className="profile-info">
+    <div className="business-dashboard">
+      {/* Header Section */}
+      <header className="dashboard-header">
+        <div className="user-info">
           <img
+            loading="lazy"
             src={
-              userData.profileImage ||
+              userData?.profileImage ||
               `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                userData.name
+                userData?.name
               )}`
             }
             alt="Profile"
             className="profile-picture"
           />
-          <div className="profile-details">
-            <h2>{userData.name}</h2>
-            <p>{userData.email}</p>
-            <div className="plan-counts">
-              <span>Daily Plans: {userData.dailyPlanCount}</span>
-              <span>Remaining Today: {userData.remainingPlansToday}</span>
+          <h1 className="user-name">{userData?.name}</h1>
+          <p className="user-email">{userData?.email}</p>
+        </div>
+
+        <div className="daily-stats">
+          <div className="stat-card">
+            <span>Daily Plans</span>
+            <div className="stat-value">{userData?.dailyPlanCount}</div>
+          </div>
+          <div className="stat-card">
+            <span>Remaining Today</span>
+            <div className="stat-value highlight">
+              {" "}
+              {userData?.remainingPlansToday}
             </div>
           </div>
         </div>
+      </header>
 
-        <div className="profile-actions">
-          <button className="home-button" onClick={() => router.push("/")}>
-            Home
-          </button>
-          <button className="logout-button" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </div>
+      <div className="divider"></div>
 
-      <div className="business-plans-section">
-        <h3>Your Business Plans</h3>
+      {/* Business Plans Section */}
+      <section className="plans-section">
+        <h2 className="section-title">Your Business Plans</h2>
 
-        {userData.plans.length === 0 ? (
-          <p className="no-plans">You don't have any business plans yet.</p>
-        ) : (
-          <div className="plans-grid">
-            {userData.plans.map((plan) => (
-              <div
-                key={plan._id}
-                className="business-plan-card"
-                onClick={() => handlePlanClick(plan._id)}
-              >
-                <h4>{plan.businessName}</h4>
-                <p className="plan-created">
-                  Created: {formatDate(plan.createdAt)}
-                </p>
-                <div className="plan-summary">
-                  <span>{plan.plans.length} pricing tiers</span>
-                  <span>From {plan.plans[0].price}</span>
+        <div className="plans-grid">
+          {userData.plans.map((plan) => (
+            <div
+              key={plan?._id}
+              className={`plan-card ${activePlan === plan._id ? "active" : ""}`}
+              onClick={() => handlePlanClick(plan?._id)}
+            >
+              <div className="card-header">
+                <h3 className="plan-name">{plan?.businessName}</h3>
+                <div className="pricing-badge">
+                  From {plan?.plans?.[0]?.price}
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
 
-     
+              <div className="card-body">
+                <div className="plan-meta">
+                  <span className="meta-label">Created</span>
+                  <span>{formatDate(plan?.createdAt)}</span>
+                </div>
 
+                <div className="tiers-indicator">
+                  <div className="tiers-label">
+                    {plan?.plans?.length} pricing tiers
+                  </div>
+                  <div className="tiers-visual">
+                    {[...Array(plan?.plans?.length)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="tier-dot"
+                        style={{ animationDelay: `${i * 0.1}s` }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="card-actions">
+                <button className="action-btn">View Details</button>
+                {/* <button className="action-btn primary">Edit Plan</button> */}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
-};
-
-export default Profile;
+}

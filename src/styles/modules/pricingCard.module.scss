@@ -53,9 +53,11 @@
     width: 100%;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
-    font-weight: 500;
     transition: all 0.3s ease;
     margin-bottom: 2rem;
+    cursor: pointer;
+    font-family: 'Poppins';
+    font-weight: bold;
   }
   
   .popularButton {

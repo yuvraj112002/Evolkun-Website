@@ -61,7 +61,7 @@ export default function Header() {
         ref={navRef}
         className={`${styles.navLinks} ${menuOpen ? styles.open : ""}`}
       >
-        <Link href="#" onClick={() => setMenuOpen(false)}>
+        {/* <Link href="#" onClick={() => setMenuOpen(false)}>
           Use Cases
         </Link>
         <Link href="#" onClick={() => setMenuOpen(false)}>
@@ -72,7 +72,7 @@ export default function Header() {
         </Link>
         <Link href="#" onClick={() => setMenuOpen(false)}>
           Careers
-        </Link>
+        </Link> */}
 
         <div className={styles.container}>
           {!isAuthenticated ? (

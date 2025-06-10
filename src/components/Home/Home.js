@@ -8,7 +8,6 @@ import radialStyles from './RadialTransition.module.scss';
 import useLenisScroll from '@/hooks/useLenisScroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { toast } from 'react-toastify';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +73,6 @@ export default function HomeSection() {
   useLenisScroll();
   const buttonRef = useRef(null);
   const overlayRefs = useRef([]);
-  const cardRefs = useRef([]);
   const router = useRouter();
 
   const handleButtonClick = () => {
@@ -93,30 +91,6 @@ export default function HomeSection() {
     window.addEventListener('resize', updateButtonWidth);
     return () => window.removeEventListener('resize', updateButtonWidth);
   }, []);
-
-  // GSAP entrance animation
-  useEffect(() => {
-    gsap.from(cardRefs.current, {
-      opacity: 0,
-      y: 50,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: cardRefs.current[0],
-        start: 'top 85%',
-      },
-    });
-  }, []);
-
-  const handleHover = (el, hover) => {
-    gsap.to(el, {
-      scale: hover ? 1.03 : 1,
-      boxShadow: hover ? '0 10px 24px rgba(0,0,0,0.1)' : 'none',
-      duration: 0.3,
-      ease: 'power2.out',
-    });
-  };
 
   const cards = [
     {
@@ -183,11 +157,8 @@ export default function HomeSection() {
       <div className={styles.cardGrid}>
         {cards.map((item, index) => (
           <div
-            ref={(el) => (cardRefs.current[index] = el)}
             className={styles.featureCard}
             key={index}
-            onMouseEnter={() => handleHover(cardRefs.current[index], true)}
-            onMouseLeave={() => handleHover(cardRefs.current[index], false)}
           >
             <img src={item.img} alt={item.title} className={styles.cardImage} />
             <div className={styles.cardContent}>

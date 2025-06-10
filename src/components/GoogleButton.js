@@ -26,9 +26,10 @@ export default function GoogleLoginButton() {
               throw new Error("No credential received.");
             }
             const data = await loginWithGoogle(credentialResponse.credential);
-            console.log(data);
+          
             if (data.success) {
               router.push("/");
+              
               toast.success(data.message || "Successfully login!");
               return;
             }else{

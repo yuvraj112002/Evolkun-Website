@@ -216,7 +216,7 @@ json
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error generating pricing plans:", error.message || error);
+    console.error("Error generating pricing plans:",  error);
     return NextResponse.json(
       { message: "Failed to generate pricing plans" },
       { status: 500 }

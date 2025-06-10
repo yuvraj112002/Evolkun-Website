@@ -7,36 +7,11 @@ import styles from "@/styles/modules/pricing.module.scss";
 import { useAuth } from "@/context/UserContext";
 import { toast } from "react-toastify";
 import FeatureCard from "@/components/FeautureCard";
+import LoadingPage from "@/components/LoadingPage/LoadingPage";
 function isValidMongoId(id) {
   return /^[a-f\d]{24}$/i.test(id);
 }
-const features = [
-  {
-    title: "World’s best checkout",
-    description:
-      "Shopify checkout converts 15% better on average than other commerce platforms.",
-  },
-  {
-    title: "In-person selling",
-    description:
-      "Sell in person and keep inventory in sync with online sales—all with <strong>Shopify POS</strong>.",
-  },
-  {
-    title: "Multiple sales channels",
-    description:
-      "Promote and sell products on Instagram, TikTok, Google, and other channels.",
-  },
-  {
-    title: "In-depth analytics",
-    description:
-      "Access reports to track store performance and identify optimisation opportunities.",
-  },
-  {
-    title: "Commerce apps",
-    description:
-      "Use apps for everything from product sourcing to customizing your store.",
-  },
-];
+
 export default function PricingPage() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
@@ -96,9 +71,7 @@ export default function PricingPage() {
   }, [isAuthenticated, isLoading, user?.plans, planId]);
   if (!isAuthenticated || isLoading || loading || !planSet) {
     return (
-      <div className={styles.loaderWrapper}>
-        <div className={styles.spinner}></div>
-      </div>
+      <LoadingPage/>
     );
   }
 
@@ -119,7 +92,15 @@ export default function PricingPage() {
             <PricingCard key={index} plan={plan} isPopular={index === 1} />
           ))}
         </div>
-       
+       {/* <div className={styles.summarySection}>
+      <h2 className={styles.summaryTitle}>Summary</h2>
+      <p className={styles.summaryText}>
+        We’ve carefully analyzed your app idea and business model. Based on the goals, audience,
+        and feature needs you provided, these pricing plans reflect realistic scopes that ensure
+        functionality, scalability, and user experience. You can always upgrade as your business
+        grows or contact us for a fully custom solution.
+      </p>
+    </div> */}
         
       </div>
           <FeatureCard></FeatureCard>
