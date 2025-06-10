@@ -6,6 +6,7 @@ import styles from "./Header.module.scss";
 import Link from "next/link";
 import { useAuth } from "@/context/UserContext";
 import ProfileDropdown from "@/components/ProfileDropDown";
+import Image from "next/image";
 
 export default function Header() {
   const router = useRouter();
@@ -37,10 +38,12 @@ export default function Header() {
     <div className={styles.header}>
       {/* Logo */}
       <div className={styles.logo} onClick={() => router.push("/")}>
-        <img
+        <Image
           src="/images/logo3.png"
           alt="Evolkun Logo"
           className={styles.logoImage}
+          width={150}
+          height={50}
         />
       </div>
 

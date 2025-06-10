@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Mail, ChevronRight, Star, Sparkles } from 'lucide-react';
 
 import styles from '@/styles/modules/CommingSoon.module.scss';
@@ -7,35 +7,12 @@ import { useRouter } from 'next/navigation';
 
 const ComingSoonPage = () => {
   const [email, setEmail] = useState('');
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const router = useRouter();
   // Set target date (30 days from now)
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 30);
+  
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
-
-      if (distance > 0) {
-        setTimeLeft({
-          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000)
-        });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [targetDate]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -107,24 +84,7 @@ const ComingSoonPage = () => {
           </p>
         </div>
 
-        {/* Countdown Timer */}
-        <div className={styles['countdown-timer']}>
-          {[
-            { label: 'Days', value: timeLeft.days },
-            { label: 'Hours', value: timeLeft.hours },
-            { label: 'Minutes', value: timeLeft.minutes },
-            { label: 'Seconds', value: timeLeft.seconds }
-          ].map((item, index) => (
-            <div key={item.label} className={styles['timer-card']}>
-              <div className={`${styles['timer-value']} ${styles[`delay-${index + 1}`]}`}>
-                {item.value.toString().padStart(2, '0')}
-              </div>
-              <div className={styles['timer-label']}>
-                {item.label}
-              </div>
-            </div>
-          ))}
-        </div>
+       
 
         {/* Email Subscription */}
         <div className={styles['email-subscription']}>

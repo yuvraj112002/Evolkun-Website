@@ -791,14 +791,5 @@ export const questions = [
     ],
     helper:
       "Content plays a big role in pricing — it affects design time and SEO quality.",
-  },
-  {
-    id: 11,
-    type: "feature-display", // Custom type for rendering features
-    name: "essentialFeatures",
-    label: "Essential Features (Pre-Selected for You)",
-    helper:
-      "These are your essential features to help your business run smoothly. You can add more if needed.",
-    conditionalOn: "businessType", // This field shows up only if businessType is selected
-  },
+  }
 ];

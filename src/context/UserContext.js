@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }) => {
       return data;
     } catch (error) {
       console.log(error);
-      return { message: "Something went wrong" };
+      return ;
     } finally {
       setIsLoading(false);
     }

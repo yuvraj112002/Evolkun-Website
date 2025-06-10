@@ -68,7 +68,7 @@ export default function PricingPage() {
     };
 
     checkAndLoadPlan();
-  }, [isAuthenticated, isLoading, user?.plans, planId]);
+  }, [isAuthenticated, isLoading, user?.plans, planId,router]);
   if (!isAuthenticated || isLoading || loading || !planSet) {
     return (
       <LoadingPage/>

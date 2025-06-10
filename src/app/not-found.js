@@ -21,8 +21,8 @@ export default function NotFound() {
         <div className={styles.textContainer}>
           <h1 className={styles.title}>OOPS! PAGE NOT FOUND.</h1>
           <p className={styles.caption}>
-            You must have picked the wrong door because I haven't been able to
-            lay my eye on the page you've been searching for.
+            You must have picked the wrong door because I haven&apos;t been able to
+            lay my eye on the page you&apos;ve been searching for.
           </p>
           <button className={styles.homeBtn} onClick={() => router.push('/')}>
             BACK TO HOME

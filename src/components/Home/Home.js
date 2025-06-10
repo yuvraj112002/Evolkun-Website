@@ -8,6 +8,7 @@ import radialStyles from './RadialTransition.module.scss';
 import useLenisScroll from '@/hooks/useLenisScroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -139,7 +140,9 @@ export default function HomeSection() {
           <h1 className={styles.mainText}><Typewriter strings={TEXTS} /></h1>
           <button ref={buttonRef} className={styles.ctaButton} onClick={handleButtonClick}>
             <div className={styles.ctaBox}>
-              <img src="/svgs/arrow-right1.svg" alt="arrow" className={styles.arrow} />
+              <Image src="/svgs/arrow-right1.svg" alt="arrow" className={styles.arrow} width={120}
+  height={60}
+/>
             </div>
             <span className={styles.ctaText}>Get Free Quote Instantly</span>
           </button>
@@ -160,7 +163,9 @@ export default function HomeSection() {
             className={styles.featureCard}
             key={index}
           >
-            <img src={item.img} alt={item.title} className={styles.cardImage} />
+            <Image src={item.img} alt={item.title} className={styles.cardImage} width={120}
+  height={60}
+/>
             <div className={styles.cardContent}>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
@@ -184,7 +189,9 @@ export default function HomeSection() {
               style={{ backgroundImage: `url(${item.bg})` }}
             >
               <div className={styles.iconWrapper}>
-                <img src={item.icon} alt={item.title} />
+                <Image src={item.icon} alt={item.title} width={120}
+  height={60}
+/>
               </div>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>

@@ -42,7 +42,7 @@ export default function WebDevMainForm() {
   useEffect(() => {
     localStorage.setItem("webDevFormData", JSON.stringify(formData));
     localStorage.setItem("formStep", step.toString());
-  }, [formData]);
+  }, [formData,step]);
 
   const fetchUserCountry = async () => {
     try {
@@ -82,7 +82,7 @@ export default function WebDevMainForm() {
         platformPreference: recommendedPlatforms[selectedBusiness],
       }));
     }
-  }, [formData.businessType]);
+  }, [formData.businessType,formData.platformPreference]);
 
   const handleSubmit = async () => {
     if (!isAuthenticated) {

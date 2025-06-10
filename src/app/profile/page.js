@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/loadingSpinner";
 import "./Profile.scss";
+import Image from "next/image";
 
 export default function Profile() {
   const router = useRouter();
@@ -48,7 +49,7 @@ export default function Profile() {
     };
 
     fetchProfileIfNeeded();
-  }, [user, userData, isAuthenticated, isLoading]);
+  }, [user, userData, isAuthenticated, checkAuthProfile,router,isLoading]);
 
   const handleLogout = async () => {
     const data = await logout();

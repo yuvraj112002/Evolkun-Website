@@ -583,7 +583,7 @@ export default function AppDevMainForm() {
 
   return (
     <div className={styles.questionnaireContainer}>
-      <h1 className={styles.h1}>Let's Predict Your App's Pricing</h1>
+      <h1 className={styles.h1}>Let&apos;s Predict Your App&apos;s Pricing</h1>
       <ProgressBar step={step} totalSteps={appDevQuestions.length} />
       {error && <ToastMessage message={error} />}
 

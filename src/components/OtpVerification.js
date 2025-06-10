@@ -20,7 +20,7 @@ export default function OTPVerification() {
     } else {
       router.push("/signin")
     }
-  }, []);
+  }, [router]);
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
@@ -71,7 +71,7 @@ export default function OTPVerification() {
   return (
     <form onSubmit={handleVerifyOtp} className={styles.form}>
       <div className={styles.infoText}>
-        <p>We've sent a verification code to</p>
+        <p>We&apos;ve sent a verification code to</p>
         <strong>{email}</strong>
       </div>
 
@@ -111,7 +111,7 @@ export default function OTPVerification() {
 
       <div className={styles.resendText}>
         <p>
-          Didn't receive a code?
+          Didn&apos;t receive a code?
           <button
             type="button"
             onClick={handleResendOtp}
